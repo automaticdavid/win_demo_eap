@@ -4,5 +4,4 @@
   hosts: eap
   
   roles:
-  - redhat-cop.jboss_common
-  - redhat-cop.jboss_eap
+    - rhf_eap
