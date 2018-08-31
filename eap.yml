@@ -1,0 +1,8 @@
+---
+
+- name: EAP actions
+  hosts: eap
+  
+  roles:
+  - redhat-cop.jboss_common
+  - redhat-cop.jboss_eap
