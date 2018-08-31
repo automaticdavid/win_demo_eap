@@ -5,3 +5,5 @@
   
   roles:
     - rhf_eap
+    - redhat-cop.jboss_common
+    - redhat-cop.jboss_eap
