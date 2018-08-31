@@ -1,7 +1,7 @@
 ---
 
 - name: EAP actions
-  hosts: eap
+  hosts: "*eap"
   
   roles:
     - redhat-cop.jboss_common
