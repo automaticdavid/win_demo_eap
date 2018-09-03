@@ -16,9 +16,14 @@
 
   tasks:
 
-    - name: Install EAP
+    - name: Get WAR
+      get_url:
+        url: http://gitux01.openhybridcloud.io:8081/repository/coolstore-monolith-snapshots/com/redhat/coolstore/monolith/1.0.0-SNAPSHOT/monolith-1.0.0-20180828.131259-1.war
+        dest: /tmp/coolstore.war
+
+    - name: Install WAR
       jboss:
         deploy_path: /opt/jboss-as/jboss-eap-7.1/standalone
-        src: http://gitux01.openhybridcloud.io:8081/repository/coolstore-monolith-snapshots/com/redhat/coolstore/monolith/1.0.0-SNAPSHOT/monolith-1.0.0-20180828.131259-1.war
+        src: /tmp/coolstore.war
         deployment: coolstore
         state: present
