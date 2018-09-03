@@ -2,6 +2,11 @@
 
 - name: EAP actions
   hosts: "*eap"
+
+  vars:
+    rhn_username: "{{ rhsm_username }}"
+    rhn_password: "{{ rhsm_password }}"
+    rh_poolid: 8a85f98c651a8899016532fff64f29cd
   
   roles:
     - redhat-cop.jboss_common
