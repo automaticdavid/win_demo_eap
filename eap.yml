@@ -2,6 +2,7 @@
 
 - name: EAP actions
   hosts: "*eap"
+  become: yes
 
   vars:
     rhn_username: "{{ rhsm_username }}"
