@@ -23,7 +23,7 @@
 
     - name: Install WAR
       jboss:
-        deploy_path: /opt/jboss-as/jboss-eap-7.1/standalone
+        deploy_path: /opt/jboss-as/jboss-eap-7.1/standalone/deployments/
         src: /tmp/coolstore.war
-        deployment: coolstore
+        deployment: coolstore.war
         state: present
