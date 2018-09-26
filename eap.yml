@@ -16,6 +16,16 @@
 
   tasks:
 
+    - debug:
+        var: jboss_eap_user
+
+    - fail: 
+
+    # - name: Add to Java Options
+    #   lineinfile:
+    #     dest: "{{ jboss_instance_mktemp.stdout }}/{{ jboss_eap_runtime_conf_filename }}"
+    #     line: "JAVA_OPTS=\"$JAVA_OPTS {{ instance_java_opts }}\""
+
     - name: Get WAR
       get_url:
         url: http://gitux01.openhybridcloud.io:8081/repository/coolstore-monolith-snapshots/com/redhat/coolstore/monolith/1.0.0-SNAPSHOT/monolith-1.0.0-20180828.131259-1.war
