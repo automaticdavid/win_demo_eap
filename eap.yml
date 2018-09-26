@@ -17,7 +17,7 @@
   tasks:
 
     - debug:
-        var: jboss_eap_user
+        msg: "{{ jboss_instance_mktemp.stdout }}/{{ jboss_eap_runtime_conf_filename }}"
 
     - fail: 
 
