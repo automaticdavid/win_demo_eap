@@ -21,17 +21,19 @@
         instance_java_opts: "{{ (instance_java_opts + ' ' + item) | trim }}"
       with_items:
         - "{{ '-DDATASOURCES=COOLSTORE' }}"
-        - "{{ '-DDATASOURCES=1433' }}"
-        - "{{ '-DDATASOURCES=147.135.178.125' }}"
+        - "{{ '-COOLSTORE_SERVICE_PORT=' + sqlport }}"
+        - "{{ '-COOLSTORE_SERVICE_HOST=' +sqlip }}"
         - "{{ '-DDATASOURCES=monolith' }}"
-        - "{{ '-DDATASOURCES=sa' }}"
-        - "{{ '-DDATASOURCES=sa' }}"
-
+        - "{{ '-COOLSTORE_USERNAME=' + sqluser }}"
+        - "{{ '-COOLSTORE_PASSWORD=' + sqlpass }}"
 
     - name: Add to Java Options
       lineinfile:
         dest: "{{ jboss_eap_runtime_conf_file }}"
         line: "JAVA_OPTS=\"$JAVA_OPTS {{ instance_java_opts }}\""
+      notify:
+        - Restart JBoss
+        - Verify JBoss is running
 
     - name: Get WAR
       get_url:
