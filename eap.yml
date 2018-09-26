@@ -16,29 +16,9 @@
 
   tasks:
 
-    - name: Set Java Options Facts
-      set_fact:
-        instance_java_opts: "{{ (instance_java_opts + ' ' + item) | trim }}"
-      with_items:
-        - "{{ '-DDATASOURCES=COOLSTORE' }}"
-        - "{{ '-COOLSTORE_SERVICE_PORT=' + sqlport }}"
-        - "{{ '-COOLSTORE_SERVICE_HOST=' +sqlip }}"
-        - "{{ '-DDATASOURCES=monolith' }}"
-        - "{{ '-COOLSTORE_USERNAME=' + sqluser }}"
-        - "{{ '-COOLSTORE_PASSWORD=' + sqlpass }}"
-
-    - name: Add to Java Options
-      lineinfile:
-        dest: "{{ jboss_eap_runtime_conf_file }}"
-        line: "JAVA_OPTS=\"$JAVA_OPTS {{ instance_java_opts }}\""
-      notify:
-        - Restart JBoss
-        - Verify JBoss is running
-
     - name: Get WAR
       get_url:
-        url: http://gitux01.openhybridcloud.io:8081/repository/coolstore-monolith-snapshots/com/redhat/coolstore/monolith/1.0.0-SNAPSHOT/monolith-1.0.0-20180828.131259-1.war
-        # url: http://gitux01.openhybridcloud.io:8081/repository/coolstore-monolith-snapshots/com/redhat/coolstore/monolith/1.0.0-SNAPSHOT/monolith-1.0.0-20180926.122206-2.war
+        url: http://gitux01.openhybridcloud.io:8081/repository/coolstore-monolith-snapshots/com/redhat/coolstore/monolith/1.0.0-SNAPSHOT/monolith-1.0.0-20180926.122206-2.war
         dest: /tmp/coolstore.war
 
     - name: Install WAR
