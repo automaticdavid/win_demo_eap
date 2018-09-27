@@ -47,7 +47,7 @@
                   <password>{{ sqlpass }}</password>
               </security>
           </datasource>
-        insertafter: "\s+\<datasources\>"
+        insertafter: '\s+\<datasources\>'
 
     - name: Customize Drivers
       blockinfile:
@@ -57,7 +57,7 @@
             <driver-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver-class>
             <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
           </driver>
-        insertafter: "\s+<drivers\>"
+        insertafter: '\s+<drivers\>'
       notify: Restart JBoss
 
     - name: Get WAR
