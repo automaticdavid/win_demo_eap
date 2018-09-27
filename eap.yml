@@ -34,7 +34,6 @@
         src: files/module.xml
         dest: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/module.xml
 
-
     - name: Customize Datasources
       blockinfile:
         path: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone.xml 
@@ -44,7 +43,7 @@
               <driver>sqlserver</driver>
               <security>
                   <user-name>{{ sqluser }}</user-name>
-                  <password>{{ sqlpassword }}</password>
+                  <password>{{ sqlpass }}</password>
               </security>
           </datasource>
         insertafter: "<datasources>"
