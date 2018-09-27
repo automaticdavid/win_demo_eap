@@ -37,7 +37,6 @@
     - name: Customize Datasources
       blockinfile:
         path: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone.xml 
-              /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone.xml
         block: |
           <datasource jta="true" jndi-name="java:jboss/datasources/CoolstoreDS" pool-name="coolstore-COOLSTORE" enabled="true" use-java-context="true">
               <connection-url>jdbc:sqlserver://localhost\monolith:1433</connection-url>
