@@ -35,28 +35,9 @@
         dest: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/module.xml
 
     - name: Customize Datasources
-      blockinfile:
-        path: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone.xml 
-        block: |
-          <datasource jta="true" jndi-name="java:jboss/datasources/CoolstoreDS" pool-name="coolstore-COOLSTORE" enabled="true" use-java-context="true">
-              <connection-url>jdbc:sqlserver://localhost\monolith:1433</connection-url>
-              <driver>sqlserver</driver>
-              <security>
-                  <user-name>{{ sqluser }}</user-name>
-                  <password>{{ sqlpass }}</password>
-              </security>
-          </datasource>
-        insertafter: '\s+\<datasources\>'
-
-    - name: Customize Drivers
-      blockinfile:
-        path: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone.xml 
-        block: |
-          <driver name="sqlserver" module="com.microsoft">
-            <driver-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver-class>
-            <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
-          </driver>
-        insertafter: '\s+<drivers\>'
+      template:
+        src: templates/standalone.xml.j2
+        dest: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone.xml
       notify: Restart JBoss
 
     - name: Get WAR
