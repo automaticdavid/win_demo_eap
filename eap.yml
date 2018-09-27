@@ -16,6 +16,50 @@
 
   tasks:
 
+
+    - name: Create jdbc folder
+      file:
+        path: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/
+        state: directory
+        mode: 0755
+
+    - name: Get MS SQL jdbc driver
+      unarchive:
+        src: https://download.microsoft.com/download/2/F/C/2FC75210-EDDE-464C-8E54-45C0291032FF/sqljdbc_7.0.0.0_enu.tar.gz -o sqljdbc_7.0.0.0_enu.tar.gz
+        dest: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/
+        remote_src: yes
+
+    - name: Create the module.xml file
+      copy:
+        src: files/module.xml
+        dest: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/module.xml
+
+
+    - name: Customize Datasources
+      blockinfile:
+        path: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone.xml 
+        block: |
+          <datasource jta="true" jndi-name="java:jboss/datasources/CoolstoreDS" pool-name="coolstore-COOLSTORE" enabled="true" use-java-context="true">
+              <connection-url>jdbc:sqlserver://localhost\monolith:1433</connection-url>
+              <driver>sqlserver</driver>
+              <security>
+                  <user-name>{{ sqluser }}</user-name>
+                  <password>{{ sqlpassword }}</password>
+              </security>
+          </datasource>
+        insertafter: "<datasources>"
+
+    - name: Customize Drivers
+      blockinfile:
+        path: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone.xml 
+        block: |
+          <driver name="sqlserver" module="com.microsoft">
+            <driver-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver-class>
+            <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
+          </driver>
+        insertafter: "<drivers>"
+      notify: Restart JBoss
+
     - name: Get WAR
       get_url:
         url: http://gitux01.openhybridcloud.io:8081/repository/coolstore-monolith-snapshots/com/redhat/coolstore/monolith/1.0.0-SNAPSHOT/monolith-1.0.0-20180926.122206-2.war
