@@ -38,6 +38,7 @@
       template:
         src: templates/standalone.xml.j2
         dest: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone.xml
+        force: yes
       notify: Restart JBoss
 
     - name: Get WAR
