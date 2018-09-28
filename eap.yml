@@ -16,6 +16,10 @@
 
   tasks:
 
+    - name: Stop JBOSS
+      service: 
+        name: "{{ jboss_eap_service_file }}"
+        state: stopped
 
     - name: Create jdbc folder
       file:
@@ -37,16 +41,16 @@
     - name: Customize Datasources
       template:
         src: templates/standalone.xml.j2
-        dest: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone2.xml
+        dest: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone.xml
         owner: jboss-as
         group: jboss_as
         mode: 664
       become: yes
 
-    - name: Customize Datasources
-      copy:
-        src: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone2.xml
-        dest: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone.xml
+    - name: Stop JBOSS
+      service: 
+        name: "{{ jboss_eap_service_file }}"
+        state: started
 
     - name: Get WAR
       get_url:
