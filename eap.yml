@@ -38,6 +38,10 @@
       template:
         src: templates/standalone.xml.j2
         dest: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone.xml
+        owner: jboss-as
+        group: jboss-as
+        mode: 664
+      become: yes
 
     - name: Get WAR
       get_url:
