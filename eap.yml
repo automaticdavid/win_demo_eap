@@ -27,6 +27,12 @@
         state: directory
         mode: 0755
 
+    - name: Create download temp folder
+      file:
+        path: /tmp/sqldriver
+        state: directory
+        mode: 0755
+
     - name: Get MS SQL jdbc driver
       unarchive:
         src: https://download.microsoft.com/download/2/F/C/2FC75210-EDDE-464C-8E54-45C0291032FF/sqljdbc_7.0.0.0_enu.tar.gz
