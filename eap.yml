@@ -43,6 +43,7 @@
       copy:
         src: /tmp/sqldriver/sqljdbc_7.0/enu/mssql-jdbc-7.0.0.jre8.jar
         dest: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/mssql-jdbc-7.0.0.jre8.jar
+        remote_src: yes
 
     - name: Clean up download
       file: 
