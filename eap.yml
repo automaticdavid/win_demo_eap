@@ -54,6 +54,9 @@
       copy:
         src: files/module.xml
         dest: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/module.xml
+        owner: jboss-as
+        group: jboss_as
+        mode: 664
 
     - name: Customize Datasources
       template:
@@ -62,7 +65,6 @@
         owner: jboss-as
         group: jboss_as
         mode: 664
-      become: yes
 
     - name: Stop JBOSS
       service: 
