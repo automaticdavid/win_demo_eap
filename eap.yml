@@ -30,8 +30,18 @@
     - name: Get MS SQL jdbc driver
       unarchive:
         src: https://download.microsoft.com/download/2/F/C/2FC75210-EDDE-464C-8E54-45C0291032FF/sqljdbc_7.0.0.0_enu.tar.gz
-        dest: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/
+        dest: /tmp/sqldriver
         remote_src: yes
+
+    - name: Copy Driver to modules
+      copy:
+        src: /tmp/sqldriver/sqljdbc_7.0/enu/mssql-jdbc-7.0.0.jre8.jar
+        dest: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/mssql-jdbc-7.0.0.jre8.jar
+
+    - name: Clean up download
+      file: 
+        name: /tmp/sqldriver
+        state: absent 
 
     - name: Create the module.xml file
       copy:
