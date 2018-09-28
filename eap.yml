@@ -38,18 +38,6 @@
       template:
         src: templates/standalone.xml.j2
         dest: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone.xml
-      notify: Restart JBoss
-
-    - name: Customize Datasources
-      template:
-        src: templates/standalone.xml.j2
-        dest: /tmp/toto
-
-    - name: Customize Datasources
-      copy:
-        src: templates/standalone.xml.j2
-        dest: /tmp/titi
-
 
     - name: Get WAR
       get_url:
