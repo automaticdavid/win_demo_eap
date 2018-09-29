@@ -25,7 +25,8 @@
       file:
         path: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/
         state: directory
-        mode: 0755
+        mode: 0775
+        recurse: yes
         owner: jboss-as
         group: jboss_as
 
