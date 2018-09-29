@@ -149,11 +149,11 @@
                     </security>
                 </datasource>
                 <datasource jta="true" jndi-name="java:jboss/datasources/CoolstoreDS" pool-name="coolstore-COOLSTORE" enabled="true" use-java-context="true">
-                    <connection-url>"{{ sqljdbc }}"</connection-url>
+                    <connection-url>{{ sqljdbc }}</connection-url>
                     <driver>sqlserver</driver>
                     <security>
-                        <user-name>"{{ sqluser }}"</user-name>
-                        <password>"{{ sqlpass }}"</password>
+                        <user-name>{{ sqluser }}</user-name>
+                        <password>{{ sqlpass }}</password>
                     </security>
                 </datasource>
                 <drivers>
