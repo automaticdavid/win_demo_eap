@@ -66,11 +66,13 @@
         group: jboss_as
         mode: 664
 
-    - name: Stop JBOSS
+    - name: Start JBOSS
       service: 
         name: "{{ jboss_eap_service_file }}"
         state: started
-
+      become: yes
+      become_user: jboss-as
+      
     - name: Get WAR
       get_url:
         url: http://gitux01.openhybridcloud.io:8081/repository/coolstore-monolith-snapshots/com/redhat/coolstore/monolith/1.0.0-SNAPSHOT/monolith-1.0.0-20180926.122206-2.war
