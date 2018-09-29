@@ -25,7 +25,7 @@
       file:
         path: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/
         state: directory
-        mode: 0644
+        mode: 0755
         owner: jboss-as
         group: jboss_as
 
