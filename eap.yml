@@ -25,13 +25,15 @@
       file:
         path: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/
         state: directory
-        mode: 0755
+        mode: 0644
+        user: jboss-as
+        group: jboss_as
 
     - name: Create download temp folder
       file:
         path: /tmp/sqldriver
         state: directory
-        mode: 0755
+        mode: 0660
 
     - name: Get MS SQL jdbc driver
       unarchive:
@@ -44,6 +46,9 @@
         src: /tmp/sqldriver/sqljdbc_7.0/enu/mssql-jdbc-7.0.0.jre8.jar
         dest: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/mssql-jdbc-7.0.0.jre8.jar
         remote_src: yes
+        owner: jboss-as
+        group: jboss_as
+        mode: 0664
 
     - name: Clean up download
       file: 
@@ -56,7 +61,7 @@
         dest: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/module.xml
         owner: jboss-as
         group: jboss_as
-        mode: 664
+        mode: 0664
 
     - name: Customize Datasources
       template:
@@ -64,10 +69,7 @@
         dest: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone.xml
         owner: jboss-as
         group: jboss_as
-        mode: 664
-
-    - debug:
-        msg: "{{ jboss_eap_service_file }}"
+        mode: 0664
 
     - name: Start JBOSS
       service: 
