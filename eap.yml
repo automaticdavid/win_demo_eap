@@ -1,7 +1,6 @@
 ---
-# toto
 - name: EAP actions
-  hosts: "*eap"
+  hosts: "{{ scope }}"
   become: yes
 
   vars:
