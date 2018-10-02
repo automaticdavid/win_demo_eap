@@ -7,3 +7,8 @@
 
 - src: sabre1041.redhat-csp-download
   name: sabre1041.redhat-csp-download
+
+- src: https://github.com/nehrman/ansible-role-f5.git
+  scm: git
+  name: nehrman.ansible-role-f5
+  version: master
