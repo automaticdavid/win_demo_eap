@@ -10,7 +10,7 @@
   
   roles:
     - redhat-cop.jboss_common
-    - redhat-cop.jboss_eap
+    - jboss_eap
 
 
   tasks:
