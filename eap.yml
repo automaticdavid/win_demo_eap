@@ -15,6 +15,10 @@
 
   tasks:
 
+    - yum:
+        name: firewalld
+        state: present
+
     - name: Open TCP port for EAP
       firewalld:
         port: 8080/tcp
