@@ -18,16 +18,6 @@
         name: "{{ jboss_eap_service_file }}"
         state: stopped
 
-    - name: Remove JBoss EAP Group
-      group:
-        name: 'jboss_as'
-        state: absent
-
-    - name: Remove JBoss EAP User
-      user:
-        name: 'jboss-as'
-        state: absent 
-
     - name: Remove Java
       action: "{{ ansible_pkg_mgr }} name={{ jboss_java_pkg_name }} state=absent"
   
@@ -38,14 +28,20 @@
       action: "{{ ansible_pkg_mgr }} name='epel*' state=absent"
       changed_when: False
 
-
     - name: Remove JBOSS  
       file: 
         path: "{{ jboss_eap_library_dest_dir }}"
         state: absent
 
-    - name: Remove Java
-      action: "{{ ansible_pkg_mgr }} name={{ jboss_java_pkg_name }} state=absent"
+    - name: Remove JBoss EAP User
+      user:
+        name: 'jboss-as'
+        state: absent 
+
+    - name: Remove JBoss EAP Group
+      group:
+        name: 'jboss_as'
+        state: absent
 
     # - name: Undo HA config
     #   pass: 
