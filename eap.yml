@@ -15,7 +15,8 @@
 
   tasks:
 
-    - yum:
+    - name: Install firewalld 
+      yum:
         name: firewalld
         state: present
 

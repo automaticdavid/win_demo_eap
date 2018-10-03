@@ -91,7 +91,6 @@
     - jboss_eap
   when: transfer_method == 'csp-to-host' and jboss_eap_exists.stat.exists == false
 
-
 - name: Copy JBoss EAP
   copy:
     src: "{{ jboss_eap_artifact_name }}"
@@ -113,22 +112,22 @@
   include_tasks: apply_patch.yml
   when: jboss_eap_apply_patch|bool
 
-- name: Check if Backup Standalone Directory Exists
-  stat:
-    path: "{{ jboss_eap_home }}/{{ jboss_eap_standalone_backup_dir_name }}"
-  register: standalone_backup_dir
+# - name: Check if Backup Standalone Directory Exists
+#   stat:
+#     path: "{{ jboss_eap_home }}/{{ jboss_eap_standalone_backup_dir_name }}"
+#   register: standalone_backup_dir
 
-- name: Create Backup Standalone Directory
-  command: "cp -r {{ jboss_eap_home }}/{{ jboss_eap_default_mode }} {{ jboss_eap_home }}/{{ jboss_eap_standalone_backup_dir_name }}"
-  when: not standalone_backup_dir.stat.exists
+# - name: Create Backup Standalone Directory
+#   command: "cp -r {{ jboss_eap_home }}/{{ jboss_eap_default_mode }} {{ jboss_eap_home }}/{{ jboss_eap_standalone_backup_dir_name }}"
+#   when: not standalone_backup_dir.stat.exists
 
-- name: Change Permissions on Standalone Backup Directory
-  file:
-    state: directory
-    recurse: yes
-    path: "{{ jboss_eap_home }}/{{ jboss_eap_standalone_backup_dir_name }}"
-    owner: "{{ jboss_eap_user }}"
-    group: "{{ jboss_eap_group }}"
+# - name: Change Permissions on Standalone Backup Directory
+#   file:
+#     state: directory
+#     recurse: yes
+#     path: "{{ jboss_eap_home }}/{{ jboss_eap_standalone_backup_dir_name }}"
+#     owner: "{{ jboss_eap_user }}"
+#     group: "{{ jboss_eap_group }}"
 
 - name: Validate Instance Configuration
   fail:
