@@ -47,5 +47,5 @@
     - name: Remove Java
       action: "{{ ansible_pkg_mgr }} name={{ jboss_java_pkg_name }} state=absent"
 
-    - name: Undo HA config
-      pass: 
+    # - name: Undo HA config
+    #   pass: 
