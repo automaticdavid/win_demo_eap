@@ -5,8 +5,8 @@
 # - src: redhat-cop.jboss_eap
 #   name: redhat-cop.jboss_eap
 
-# - src: sabre1041.redhat-csp-download
-#   name: sabre1041.redhat-csp-download
+- src: sabre1041.redhat-csp-download
+  name: sabre1041.redhat-csp-download
 
 - src: https://github.com/nehrman/ansible-role-f5.git
   scm: git
