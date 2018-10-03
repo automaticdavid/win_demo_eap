@@ -9,7 +9,7 @@
     rh_poolid: "{{ rhpoolid }}"
   
   roles:
-    - redhat-cop.jboss_common
+    - jboss_common
     - jboss_eap
 
 
