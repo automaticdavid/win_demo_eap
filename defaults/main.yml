@@ -1,0 +1,16 @@
+scope: "{{ scope }}"
+sqlip:  "{{ sqlip }}"
+rhpoolid: "{{ rhpoolid }}"
+version: '1.1.0'
+eap_ha: false
+artifact: >-
+  http://gitux01.openhybridcloud.io:8081/repository/coolstore-monolith/com/redhat/coolstore/monolith/{{ version }}/monolith-{{ version }}.war
+jboss_eap_apply_patch: false
+jboss_eap_base_directory_name: /tmp/jboss-eap-7.1.0
+jboss_source_share: 'utils01.openhybridcloud.io:/exports/jboss'
+rhsm_disable_existing_repositories: false
+rhsm_enable_required_repositories: true
+rhsm_subscribe_host: false
+sqljdbc: 'jdbc:sqlserver://{{ sqlip }}\RHFORUM:{{ sqlport }};databaseName=monolith'
+sqlport: '1433'
+transfer_method: copy-from-controller
