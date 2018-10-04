@@ -46,7 +46,6 @@
     - name: Open TCP port for EAP
       firewalld:
         port: 8080/tcp
-        permanent: true
         state: enabled 
 
     - name: Stop JBOSS
