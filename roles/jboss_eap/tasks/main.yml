@@ -108,13 +108,18 @@
     src: "{{ jboss_source_share }}"
     fstype: nfs
     opts: ro,noauto,all_squash
-    state: present
+    state: mounted
 
 - name: Copy JBoss EAP
   copy:
-    src: "{{ jboss_source_share }}/jboss-eap-7.1.0.zip"
+    src: "/mnt/jboss/jboss-eap-7.1.0.zip"
     dest: "{{ jboss_eap_artifact_dl_dest }}"
   when: transfer_method == 'copy-from-controller' and jboss_eap_exists.stat.exists == false
+
+- name: Unmount Source folder
+  mount:
+    path: /mnt/jboss
+    state: absent
 
 - name: Extract JBoss EAP Libraries
   become: true
