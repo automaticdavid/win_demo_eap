@@ -11,26 +11,44 @@
 
   pre_tasks:
 
-    - include_vars:
-        file: vars/all.yml
-
-    - name: Install nfs client
-      yum: 
-        name: nfs-utils
-        state: present
-
     - name: Create mount dir 
       file:
         path: /mnt/jboss
         state: directory
         mode: 0755
 
-    - name: Mount Source folder
-      mount:
-        path: /mnt/jboss
-        src: "{{ jboss_source_share }}"
-        fstype: nfs
-        state: mounted
+    - include_vars:
+        file: vars/all.yml
+
+    block:
+
+      - name: Install nfs client
+        yum: 
+          name: nfs-utils
+          state: present
+
+      - name: Mount Source folder
+        mount:
+          path: /mnt/jboss
+          src: "{{ jboss_source_share }}"
+          fstype: nfs
+          state: mounted
+
+    when: infra == 'rhv'
+
+    block:
+
+      - name: Get JBOSS source
+        get_url:
+          url : "{{ s3_eap }}"
+          dest: /mnt/jboss/
+
+      - name: Get JDBC driver 
+        get_url:
+          url :  "{{ s3_jdbc }}"
+          dest: /mnt/jboss/          
+
+    when: infra == 'aws'
 
 
   roles:
