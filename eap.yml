@@ -60,6 +60,12 @@
         name: firewalld
         state: present
 
+    - name: Start firewalld 
+      service:
+        name: firewalld
+        state: started
+        enabled: yes
+
     - name: Open TCP port for EAP
       firewalld:
         port: 8080/tcp
