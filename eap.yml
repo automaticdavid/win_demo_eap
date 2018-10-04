@@ -20,7 +20,7 @@
     - include_vars:
         file: vars/all.yml
 
-    block:
+    - block:
 
       - name: Install nfs client
         yum: 
@@ -36,7 +36,7 @@
 
     when: infra == 'rhv'
 
-    block:
+    - block:
 
       - name: Get JBOSS source
         get_url:
