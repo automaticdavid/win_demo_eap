@@ -113,6 +113,7 @@
   copy:
     src: "/mnt/jboss/jboss-eap-7.1.0.zip"
     dest: "{{ jboss_eap_artifact_dl_dest }}"
+    remote_src: yes
   when: transfer_method == 'copy-from-controller' and jboss_eap_exists.stat.exists == false
 
 - name: Unmount Source folder
