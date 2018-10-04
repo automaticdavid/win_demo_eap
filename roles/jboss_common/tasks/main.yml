@@ -29,22 +29,22 @@
     - common
   when: ansible_distribution_major_version is version_compare('7', '<')
 
-- name: Install PIP dependencies and Remove EPEL
-  block:
-    - name: Install PIP
-      action: "{{ ansible_pkg_mgr }} name=python-pip state=latest"
-      tags:
-        - common
+# - name: Install PIP dependencies and Remove EPEL
+#   block:
+#     - name: Install PIP
+#       action: "{{ ansible_pkg_mgr }} name=python-pip state=latest"
+#       tags:
+#         - common
 
-    - name: Install Python Dependencies
-      pip:
-        name: "{{item}}"
-        state: present
-      with_items:
-        - requests
-        - lxml
-      tags:
-        - common
+#     - name: Install Python Dependencies
+#       pip:
+#         name: "{{item}}"
+#         state: present
+#       with_items:
+#         - requests
+#         - lxml
+#       tags:
+#         - common
 
   #   - name: Remove EPEL Package
   #     action: "{{ ansible_pkg_mgr }} name='epel*' state=absent"
