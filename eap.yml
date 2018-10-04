@@ -11,6 +11,9 @@
 
   pre_tasks:
 
+    - include_vars:
+        file: vars/all.yml
+
     - name: Install nfs client
       yum: 
         name: nfs-utils
