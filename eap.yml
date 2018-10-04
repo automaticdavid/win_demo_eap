@@ -127,6 +127,9 @@
       ignore_errors: yes
 
     - name: Ensure Nodes are present in F5 Load Balancer
+      vars:
+        bigip_node_port: "8080"
+        bigip_pool_name: "rhforum_eap_pool"
       include_role:
         name: nehrman.ansible-role-f5
         tasks_from: add_node.yml
