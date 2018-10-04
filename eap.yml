@@ -68,7 +68,7 @@
 
     - name: Get MS SQL jdbc driver
       unarchive:
-        src: "{{ jboss_source_share }}/sqljdbc_7.0.0.0_enu.tar.gz"
+        src: /mnt/jboss/sqljdbc_7.0.0.0_enu.tar.gz
         dest: /tmp/sqldriver
         remote_src: yes
 
