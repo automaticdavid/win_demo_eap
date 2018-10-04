@@ -177,17 +177,10 @@
     - Restart JBoss
     - Verify JBoss is running
 
-- name: Remove JBoss Instance Temporary Directory
-  file:
-    path: "{{ jboss_instance_mktemp.stdout }}"
-    state: absent
-
-# RHEL 6 expects init.d service with extension
-##
-- name: Set JBoss EAP Service Name EL 6
-  set_fact:
-    jboss_eap_service_name: "{{jboss_eap_service_file}}"
-  when: (ansible_distribution_major_version is version_compare('6','<='))
+# - name: Remove JBoss Instance Temporary Directory
+#   file:
+#     path: "{{ jboss_instance_mktemp.stdout }}"
+#     state: absent
 
 ##
 # RHEL 7 expects init.d service without extension

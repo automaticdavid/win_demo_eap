@@ -46,11 +46,11 @@
         - common
       when: epel.stat.exists == False
 
-    - name: Install EPEL for RHEL
-      yum:
-        name: /tmp/epel-release-latest-7.noarch.rpm 
-        state: present
-      changed_when: False
-      tags:
-        - common
-  when: transfer_method == 'csp-to-host' and install_pip_dependencies|bool
+  #   - name: Install EPEL for RHEL
+  #     yum:
+  #       name: /tmp/epel-release-latest-7.noarch.rpm 
+  #       state: present
+  #     changed_when: False
+  #     tags:
+  #       - common
+  # when: transfer_method == 'csp-to-host' and install_pip_dependencies|bool

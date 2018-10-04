@@ -32,9 +32,12 @@
         fstype: nfs
         state: mounted
 
+
   roles:
+
     - jboss_common
     - jboss_eap
+
 
   tasks:
 

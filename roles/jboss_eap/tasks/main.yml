@@ -40,7 +40,6 @@
     home: "{{ jboss_eap_library_dest_dir }}"
     shell: "/bin/bash"
 
-#### Defensive Programming To Check If EAP Is Already Installed
 - name: Check Existence of Libraries
   become: true
   stat:
@@ -89,7 +88,6 @@
 #   tags:
 #     - jboss_eap
 #   when: transfer_method == 'csp-to-host' and jboss_eap_exists.stat.exists == false
-
 
 
 

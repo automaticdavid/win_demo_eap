@@ -7,10 +7,6 @@
   include: main-rhel.yml
   when: ansible_distribution == 'RedHat'
 
-- name: Tasks on a CentOS host
-  include: main-centos.yml
-  when: ansible_distribution == 'CentOS'
-
 - name: Install Java
   action: "{{ ansible_pkg_mgr }} name={{ jboss_java_pkg_name }} state=latest"
   when: install_java|bool
@@ -22,12 +18,12 @@
   tags:
   - common
 
-# initscripts are for : v6.x or older
-- name: Install initscripts
-  action: "{{ ansible_pkg_mgr }} name=initscripts state=latest"
-  tags:
-    - common
-  when: ansible_distribution_major_version is version_compare('7', '<')
+# # initscripts are for : v6.x or older
+# - name: Install initscripts
+#   action: "{{ ansible_pkg_mgr }} name=initscripts state=latest"
+#   tags:
+#     - common
+#   when: ansible_distribution_major_version is version_compare('7', '<')
 
 # - name: Install PIP dependencies and Remove EPEL
 #   block:
