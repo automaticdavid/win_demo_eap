@@ -11,4 +11,4 @@
 - src: https://github.com/nehrman/ansible-role-f5.git
   scm: git
   name: nehrman.ansible-role-f5
-  version: master
+  version: 46726ad55d8f5a2417fe25892e69a054a783c40b
