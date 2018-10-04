@@ -43,6 +43,12 @@
         name: 'jboss_as'
         state: absent
 
+
+    - name: Open TCP port for EAP
+      firewalld:
+        port: 8080/tcp
+        state: disabled 
+
     # - name: Remove firewalld
     #   yum:
     #     name: firewalld
@@ -61,4 +67,3 @@
     # - name: Undo HA config
     #   pass: 
 
-    
