@@ -21,7 +21,7 @@
         file: vars/all.yml
 
     - name: RHV ops
-        block:
+      block:
         - name: Install nfs client
           yum: 
             name: nfs-utils
@@ -35,7 +35,7 @@
       when: infra == 'rhv'
 
     - name: AWS ops
-        block:
+      block:
         - name: Get JBOSS source
           get_url:
             url : "{{ s3_eap }}"
