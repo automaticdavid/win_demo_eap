@@ -155,7 +155,6 @@
 
 - name: LB actions
   hosts: "{{ scope }}"
-  become: yes
   connection: local
 
   tasks:
