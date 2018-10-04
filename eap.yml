@@ -8,6 +8,27 @@
     rhn_password: "{{ rhsm_password }}"
     rh_poolid: "{{ rhpoolid }}"
   
+
+  pre_tasks:
+
+    - name: Install nfs client
+      yum: 
+        name: nfs-utils
+        state: present
+
+    - name: Create mount dir 
+        file:
+        path: /mnt/jboss
+        state: directory
+        mode: 0755
+
+    - name: Mount Source folder
+      mount:
+        path: /mnt/jboss
+        src: "{{ jboss_source_share }}"
+        fstype: nfs
+        state: mounted
+
   roles:
     - jboss_common
     - jboss_eap
@@ -47,7 +68,7 @@
 
     - name: Get MS SQL jdbc driver
       unarchive:
-        src: https://download.microsoft.com/download/2/F/C/2FC75210-EDDE-464C-8E54-45C0291032FF/sqljdbc_7.0.0.0_enu.tar.gz
+        src: "{{ jboss_source_share }}/sqljdbc_7.0.0.0_enu.tar.gz"
         dest: /tmp/sqldriver
         remote_src: yes
 
@@ -107,6 +128,10 @@
       delegate_to: localhost
       when: eap_ha
 
+    - name: Unmount Source folder
+      mount:
+        path: /mnt/jboss
+        state: absent
 
 
 

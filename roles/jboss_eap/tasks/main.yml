@@ -91,23 +91,7 @@
 #   when: transfer_method == 'csp-to-host' and jboss_eap_exists.stat.exists == false
 
 
-- name: Install nfs client
-  yum: 
-    name: nfs-utils
-    state: present
 
-- name: Create mount dir 
-  file:
-    path: /mnt/jboss
-    state: directory
-    mode: 0755
-
-- name: Mount Source folder
-  mount:
-    path: /mnt/jboss
-    src: "{{ jboss_source_share }}"
-    fstype: nfs
-    state: mounted
 
 - name: Copy JBoss EAP
   copy:
@@ -116,10 +100,7 @@
     remote_src: yes
   when: transfer_method == 'copy-from-controller' and jboss_eap_exists.stat.exists == false
 
-- name: Unmount Source folder
-  mount:
-    path: /mnt/jboss
-    state: absent
+
 
 - name: Extract JBoss EAP Libraries
   become: true
