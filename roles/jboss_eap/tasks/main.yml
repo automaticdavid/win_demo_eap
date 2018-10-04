@@ -109,6 +109,7 @@
     fstype: nfs
     opts: ro,noauto,all_squash
     state: mounted
+  become: yes
 
 - name: Copy JBoss EAP
   copy:
