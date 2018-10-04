@@ -43,10 +43,10 @@
         name: 'jboss_as'
         state: absent
 
-    - name: Remove firewalld
-      yum:
-        name: firewalld
-        state: absent
+    # - name: Remove firewalld
+    #   yum:
+    #     name: firewalld
+    #     state: absent
 
     - name: Clean up downloads
       file:
