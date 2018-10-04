@@ -17,7 +17,7 @@
         state: present
 
     - name: Create mount dir 
-        file:
+      file:
         path: /mnt/jboss
         state: directory
         mode: 0755
