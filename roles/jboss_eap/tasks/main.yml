@@ -40,7 +40,6 @@
     home: "{{ jboss_eap_library_dest_dir }}"
     shell: "/bin/bash"
 
-
 #### Defensive Programming To Check If EAP Is Already Installed
 - name: Check Existence of Libraries
   become: true
@@ -49,51 +48,71 @@
   register: jboss_eap_exists
 
 
-- name: Async Download JBoss EAP by URL (HTTP/HTTPS/FTP)
-  get_url:
-    url: "{{ jboss_eap_artifact_url }}"
-    dest: "{{ jboss_eap_artifact_dl_dest }}"
-    url_username: "{{ url_username | default(None) }}"
-    url_password: "{{ url_password | default(None) }}"
-  async: 7200
-  poll: 0
-  register: url_jboss_eap_download
-  when: transfer_method == 'url' and jboss_eap_exists.stat.exists == false
+# - name: Async Download JBoss EAP by URL (HTTP/HTTPS/FTP)
+#   get_url:
+#     url: "{{ jboss_eap_artifact_url }}"
+#     dest: "{{ jboss_eap_artifact_dl_dest }}"
+#     url_username: "{{ url_username | default(None) }}"
+#     url_password: "{{ url_password | default(None) }}"
+#   async: 7200
+#   poll: 0
+#   register: url_jboss_eap_download
+#   when: transfer_method == 'url' and jboss_eap_exists.stat.exists == false
 
-- name: Check On JBoss EAP Download Completion (URL)
-  async_status: jid={{ url_jboss_eap_download.ansible_job_id }}
-  register: job_result1
-  until: job_result1.finished
-  retries: 600
-  delay: 10
-  when: transfer_method == 'url' and jboss_eap_exists.stat.exists == false
+# - name: Check On JBoss EAP Download Completion (URL)
+#   async_status: jid={{ url_jboss_eap_download.ansible_job_id }}
+#   register: job_result1
+#   until: job_result1.finished
+#   retries: 600
+#   delay: 10
+#   when: transfer_method == 'url' and jboss_eap_exists.stat.exists == false
 
-- name: Async Download JBoss EAP from Red Hat Customer Portal
-  redhat_csp_download:
-    url: "{{ jboss_eap_artifact_url }}"
-    dest: "{{ jboss_eap_artifact_dl_dest }}"
-    username: "{{ rhn_username }}"
-    password: "{{ rhn_password }}"
-  async: 7200
-  poll: 0
-  register: csp_jboss_eap_download
-  tags:
-    - jboss_eap
-  when: transfer_method == 'csp-to-host' and jboss_eap_exists.stat.exists == false
+# - name: Async Download JBoss EAP from Red Hat Customer Portal
+#   redhat_csp_download:
+#     url: "{{ jboss_eap_artifact_url }}"
+#     dest: "{{ jboss_eap_artifact_dl_dest }}"
+#     username: "{{ rhn_username }}"
+#     password: "{{ rhn_password }}"
+#   async: 7200
+#   poll: 0
+#   register: csp_jboss_eap_download
+#   tags:
+#     - jboss_eap
+#   when: transfer_method == 'csp-to-host' and jboss_eap_exists.stat.exists == false
 
-- name: Check On JBoss EAP Download Completion (CSP)
-  async_status: jid={{ csp_jboss_eap_download.ansible_job_id }}
-  register: job_result1
-  until: job_result1.finished
-  retries: 600
-  delay: 10
-  tags:
-    - jboss_eap
-  when: transfer_method == 'csp-to-host' and jboss_eap_exists.stat.exists == false
+# - name: Check On JBoss EAP Download Completion (CSP)
+#   async_status: jid={{ csp_jboss_eap_download.ansible_job_id }}
+#   register: job_result1
+#   until: job_result1.finished
+#   retries: 600
+#   delay: 10
+#   tags:
+#     - jboss_eap
+#   when: transfer_method == 'csp-to-host' and jboss_eap_exists.stat.exists == false
+
+
+- name: Install nfs client
+  yum: 
+    name: nfs-utils
+    state: present
+
+- name: Create mount dir 
+  file:
+    path: /mnt/jboss
+    state: directory
+    mode: 0755
+
+- name: Mount Source folder
+  mount:
+    path: /mnt/jboss
+    src: "{{ jboss_source_share }}"
+    fstype: nfs
+    opts: ro,noauto,all_squash
+    state: present
 
 - name: Copy JBoss EAP
   copy:
-    src: "{{ jboss_eap_artifact_name }}"
+    src: "{{ jboss_source_share }}/jboss-eap-7.1.0.zip"
     dest: "{{ jboss_eap_artifact_dl_dest }}"
   when: transfer_method == 'copy-from-controller' and jboss_eap_exists.stat.exists == false
 
