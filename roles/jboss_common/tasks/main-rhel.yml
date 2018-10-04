@@ -34,15 +34,22 @@
 
 - name: EPEL Configuration
   block:
+
+    - stat: path=/tmp/epel-release-latest-7.noarch.rpm
+      register: epel
+
     - name: Download EPEL for RHEL
       get_url:
         url: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"
         dest: "/tmp"
       tags:
         - common
+      when: epel.stat.exists == False
 
     - name: Install EPEL for RHEL
-      action: "{{ ansible_pkg_mgr }} name=/tmp/epel-release-latest-7.noarch.rpm state=present"
+      yum:
+        name: /tmp/epel-release-latest-7.noarch.rpm 
+        state: present
       changed_when: False
       tags:
         - common
