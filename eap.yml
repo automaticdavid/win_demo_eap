@@ -144,6 +144,20 @@
         state: present
       ignore_errors: yes
 
+    - name: Unmount Source folder
+      mount:
+        path: /mnt/jboss
+        state: absent
+      when: infra == 'rhv'
+
+
+- name: LB actions
+  hosts: "{{ scope }}"
+  become: yes
+  connection: local
+
+  tasks:
+
     - name: Ensure Nodes are present in F5 Load Balancer
       vars:
         bigip_node_port: "8080"
@@ -152,13 +166,9 @@
       include_role:
         name: nehrman.ansible-role-f5
         tasks_from: add_node.yml
-      delegate_to: localhost
       when: eap_ha
 
-    - name: Unmount Source folder
-      mount:
-        path: /mnt/jboss
-        state: absent
+
 
 
 
