@@ -107,10 +107,7 @@
     path: /mnt/jboss
     src: "{{ jboss_source_share }}"
     fstype: nfs
-    opts: ro,noauto,all_squash
     state: mounted
-  become: yes
-  become_user: root
 
 - name: Copy JBoss EAP
   copy:
