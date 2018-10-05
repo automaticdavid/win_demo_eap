@@ -54,15 +54,15 @@
     #     name: firewalld
     #     state: absent
 
-    - name: Clean up downloads
-      file:
-        name: "/tmp/{{ item }}"
-        state: absent
-      with_items:
-        - epel-release-latest-7.noarch.rpm
-        - jboss-eap-7.1.0.zip
-        - jboss-eap-7.1.2-patch.zip
-        - coolstore.war
+    # - name: Clean up downloads
+    #   file:
+    #     name: "/tmp/{{ item }}"
+    #     state: absent
+    #   with_items:
+    #     - epel-release-latest-7.noarch.rpm
+    #     - jboss-eap-7.1.0.zip
+    #     - jboss-eap-7.1.2-patch.zip
+    #     - coolstore.war
 
     # - name: Undo HA config
     #   pass: 

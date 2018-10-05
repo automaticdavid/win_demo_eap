@@ -168,6 +168,8 @@
         name: nehrman.ansible-role-f5
         tasks_from: add_node.yml
       when: eap_ha
+      tag:
+        - f5
 
 
 
