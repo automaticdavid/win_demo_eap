@@ -63,13 +63,13 @@
     - name: Start firewalld 
       service:
         name: firewalld
-        state: started
+        state: stopped
         enabled: yes
 
-    - name: Open TCP port for EAP
-      firewalld:
-        port: 8080/tcp
-        state: enabled 
+    # - name: Open TCP port for EAP
+    #   firewalld:
+    #     port: 8080/tcp
+    #     state: enabled 
 
     - name: Stop JBOSS
       service: 
