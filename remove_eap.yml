@@ -44,10 +44,10 @@
         state: absent
 
 
-    - name: Close TCP port for EAP
-      firewalld:
-        port: 8080/tcp
-        state: disabled 
+    # - name: Close TCP port for EAP
+    #   firewalld:
+    #     port: 8080/tcp
+    #     state: disabled 
 
     # - name: Remove firewalld
     #   yum:
