@@ -18,8 +18,8 @@
         name: "{{ jboss_eap_service_file }}"
         state: stopped
 
-    - name: Remove Java
-      action: "{{ ansible_pkg_mgr }} name={{ jboss_java_pkg_name }} state=absent"
+    # - name: Remove Java
+    #   action: "{{ ansible_pkg_mgr }} name={{ jboss_java_pkg_name }} state=absent"
   
     # - name: Remove Unzip
     #   action: "{{ ansible_pkg_mgr }} name=unzip state=absent"
@@ -44,7 +44,7 @@
         state: absent
 
 
-    - name: Open TCP port for EAP
+    - name: Close TCP port for EAP
       firewalld:
         port: 8080/tcp
         state: disabled 
