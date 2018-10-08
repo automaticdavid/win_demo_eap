@@ -121,7 +121,7 @@
 
     - name: Customize Datasources
       template:
-        src: templates/standalone.xml.j2
+        src: templates/standalone-ha.xml.j2
         dest: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone-ha.xml
         owner: jboss-as
         group: jboss_as
