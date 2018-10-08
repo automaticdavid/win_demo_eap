@@ -1,22 +1,22 @@
 ---
 
-- name: Subscribe the host to RHSM
-  block:
-    - name: Check Pool ID definition
-      fail: msg="Extra variable rh_poolid has not been defined. Please add it before running this playbook"
-      when: rh_poolid is not defined
+# - name: Subscribe the host to RHSM
+#   block:
+#     - name: Check Pool ID definition
+#       fail: msg="Extra variable rh_poolid has not been defined. Please add it before running this playbook"
+#       when: rh_poolid is not defined
 
-    - name: Subscribe the host
-      redhat_subscription:
-        state: present
-        username: "{{ rhn_username }}"
-        password: "{{ rhn_password }}"
-        autosubscribe: true
+#     - name: Subscribe the host
+#       redhat_subscription:
+#         state: present
+#         username: "{{ rhn_username }}"
+#         password: "{{ rhn_password }}"
+#         autosubscribe: true
 
-    - name: Attach to pool
-      command: subscription-manager attach --pool="{{ rh_poolid }}"
-      ignore_errors: yes
-  when: rhsm_subscribe_host|bool
+#     - name: Attach to pool
+#       command: subscription-manager attach --pool="{{ rh_poolid }}"
+#       ignore_errors: yes
+#   when: rhsm_subscribe_host|bool
 
 # - name: Disable All RHEL Repositories
   # command: "subscription-manager repos --disable=*"
