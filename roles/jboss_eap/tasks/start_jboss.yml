@@ -1,17 +1,17 @@
 ---
 
-- set_fact: 
-    current_ip: "{{ ansible_host }} "
-  when: infra == 'rhv'
+# - set_fact: 
+#     current_ip: "{{ ansible_host }} "
+#   when: infra == 'rhv'
 
-- set_fact: 
-    current_ip: "{{ inventory_hostname }} "
-  when: infra == 'aws'
+# - set_fact: 
+#     current_ip: "{{ inventory_hostname }} "
+#   when: infra == 'aws'
 
 - name: Start JBOSS
   shell: |
     export LAUNCH_JBOSS_IN_BACKGROUND=1
-    bin/standalone.sh --server-config=standalone-ha.xml -Djboss.bind.address={{ current_ip }}  -Djboss.server.log.dir=/tmp/  
+    bin/standalone.sh --server-config=standalone-ha.xml -Djboss.bind.address={{ ansible_host }}  -Djboss.server.log.dir=/tmp/  
   args: 
     chdir: /opt/jboss-as/jboss-eap-7.1/ 
   become: true
