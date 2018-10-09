@@ -1,0 +1,12 @@
+---
+- name: Get running JBOSS
+  shell: "ps -ef | grep -v grep | grep -w eap | awk '{print $2}'"
+  register: jboss
+
+- name: Stop JBOSS
+  shell: "kill {{ item }} 2>&1 > /dev/null"
+  with_items: "{{ jboss.stdout_lines.0 }}"
+  become: yes
+  ignore_errors: yes
+  when: jboss.stdout_lines.0 is defined
+

@@ -72,9 +72,9 @@
     #     state: enabled 
 
     - name: Stop JBOSS
-      service: 
-        name: "{{ jboss_eap_service_file }}"
-        state: stopped
+      include_role: 
+        name: jboss_eap
+        tasks_from: stop_jboss
 
     - name: Create jdbc folder
       file:
@@ -128,9 +128,9 @@
         mode: 0664
 
     - name: Start JBOSS
-      service: 
-        name: "{{ jboss_eap_service_file }}"
-        state: started
+      include_role: 
+        name: jboss_eap
+        tasks_from: start_jboss
 
     - name: Get WAR
       get_url:

@@ -427,11 +427,10 @@
                     <protocol type="TCPPING">
                         <property name="initial_hosts">
                         <!-- Added For CoolStore -->
-
                             {% for ip in ips %}
-                            ip [7600],
+                            {{ip}} [7600],
                             {% if loop.last %}
-                            ip [7600]
+                            {{ip}} [7600]
                             {% endif %}
                             {% endfor %}
                         <!-- End of Added For CoolStore -->
