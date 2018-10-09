@@ -3,4 +3,4 @@
   command:
     chdir: /opt/jboss-as/jboss-eap-7.1/ 
     cmd: |
-      nohup bin/standalone.sh --server-config=standalone-ha.xml -Djboss.bind.address={{ inventory_hostname }}  -Djboss.server.log.dir=/tmp/ >/dev/null 2>&1 &
+      nohup bin/standalone.sh --server-config=standalone-ha.xml -Djboss.bind.address={{ inventory_hostname }}  -Djboss.server.log.dir=/tmp/ &
