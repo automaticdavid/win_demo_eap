@@ -159,12 +159,6 @@
 
   tasks:
 
-
-    - debug:
-        msg: "Hello World"
-      tags:
-        - f5
-
     - name: Ensure Nodes are present in F5 Load Balancer
       vars:
         bigip_node_port: "8080"
