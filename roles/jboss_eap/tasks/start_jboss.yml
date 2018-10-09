@@ -9,7 +9,7 @@
 #   when: infra == 'aws'
 
 - name: Start JBOSS
-  environement:
+  environment:
     LAUNCH_JBOSS_IN_BACKGROUND: 1 
   shell: |
     bin/standalone.sh --server-config=standalone-ha.xml -Djboss.bind.address={{ ansible_host }}  -Djboss.server.log.dir=/tmp/  
