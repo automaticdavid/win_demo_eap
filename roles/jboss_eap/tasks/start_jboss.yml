@@ -1,5 +1,6 @@
 ---
 - name: Start JBOSS
   command:
+    chdir: /opt/jboss-as/jboss-eap-7.1/ 
     cmd: |
-      daemon /opt/jboss-as/jboss-eap-7.1/bin/standalone.sh --server-config=/opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone-ha.xml
+       bin/standalone.sh --server-config=standalone-ha.xml -Djboss.bind.address={{ inventory_hostname }}
