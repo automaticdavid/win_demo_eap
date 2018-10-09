@@ -13,6 +13,6 @@
     bin/standalone.sh --server-config=standalone-ha.xml -Djboss.bind.address={{ ansible_host }}  -Djboss.server.log.dir=/tmp/  
   args: 
     chdir: /opt/jboss-as/jboss-eap-7.1/ 
-  async: 1
+  async: 60
   poll: 0
   become: true
