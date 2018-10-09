@@ -192,11 +192,11 @@
   become: true
   command: "chkconfig --add {{ jboss_eap_service_file }}"
 
-# - name: "Enable {{ jboss_eap_service_file }} Service"
-  # become: true
-  # service:
-    # name: "{{ jboss_eap_service_file }}"
-    # enabled: yes
+- name: "Enable {{ jboss_eap_service_file }} Service"
+  become: true
+  service:
+    name: "{{ jboss_eap_service_file }}"
+    enabled: yes
 
 # - name: Flush JBoss instance handlers
 #   meta: flush_handlers
