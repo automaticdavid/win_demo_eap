@@ -9,10 +9,10 @@
 #   when: infra == 'aws'
 
 - name: Start JBOSS
-  environment:
-    LAUNCH_JBOSS_IN_BACKGROUND: 1 
   shell: |
     bin/standalone.sh --server-config=standalone-ha.xml -Djboss.bind.address={{ ansible_host }}  -Djboss.server.log.dir=/tmp/  
   args: 
     chdir: /opt/jboss-as/jboss-eap-7.1/ 
+  async: 1
+  poll: 0
   become: true
