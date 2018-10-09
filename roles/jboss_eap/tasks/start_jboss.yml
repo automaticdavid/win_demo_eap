@@ -10,8 +10,7 @@
 
 - name: Start JBOSS
   shell: |
-    export LAUNCH_JBOSS_IN_BACKGROUND=1
-    bin/standalone.sh --server-config=standalone-ha.xml -Djboss.bind.address={{ ansible_host }}  -Djboss.server.log.dir=/tmp/  
+    daemon -- bin/standalone.sh --server-config=standalone-ha.xml -Djboss.bind.address={{ ansible_host }}  -Djboss.server.log.dir=/tmp/  
   args: 
     chdir: /opt/jboss-as/jboss-eap-7.1/ 
   become: true
