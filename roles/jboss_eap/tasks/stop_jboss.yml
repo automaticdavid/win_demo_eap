@@ -2,6 +2,7 @@
 - name: Get running JBOSS
   shell: "ps -ef | grep -v grep | grep -w eap | awk '{print $2}'"
   register: jboss
+  become: true
 
 - name: Stop JBOSS
   shell: "kill {{ item }} 2>&1 > /dev/null"
