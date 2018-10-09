@@ -90,15 +90,12 @@
 #   when: transfer_method == 'csp-to-host' and jboss_eap_exists.stat.exists == false
 
 
-
 - name: Copy JBoss EAP
   copy:
     src: "/mnt/jboss/jboss-eap-7.1.0.zip"
     dest: '/tmp/jboss-eap-7.1.0.zip'
     remote_src: yes
   when: transfer_method == 'copy-from-controller' and jboss_eap_exists.stat.exists == false
-
-
 
 - name: Extract JBoss EAP Libraries
   become: true
