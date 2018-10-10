@@ -128,7 +128,7 @@
 
     - name: Customize the EAP standalone file 
       template:
-        src: "templates/{{ jboss_eap_default_config }}"
+        src: "templates/{{ jboss_eap_default_config }}.j2"
         dest: "/opt/jboss-as/jboss-eap-7.1/standalone/configuration/{{ jboss_eap_default_config }}"
         owner: jboss-as
         group: jboss_as
