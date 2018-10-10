@@ -11,34 +11,6 @@
 
   pre_tasks:
 
-
-    # - debug: 
-    #     var: hostvars
-
-    # - set_fact:
-    #     toto: 
-    #       tutu: "{{ hostvars }}"
-
-    # - debug:
-    #     var: toto
-
-    # - name: Get servers IPs 
-    #   vars: 
-    #     # ips_query: "[?`{{ scope }}`].ansible_default_ipv4.address" 
-    #     ips_query: 'tutu.*eap*.ansible_default_ipv4.address'
-    #     ips: "{{ toto | json_query(ips_query) }}" 
-    #   set_fact: 
-    #     ips: "{{ ips }}" 
-
-    - set_fact:
-        ips: "{{ groups['eap']|map('extract', hostvars, 'ansible_default_ipv4')|list }}"
-
-    - debug:
-        var: ips
-
-
-    - fail: 
-
     - include_vars:
         file: vars/all.yml
       run_once: yes
