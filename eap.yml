@@ -121,6 +121,8 @@
         mode: 0664
 
     - name: Get IPs for standalone-ha if needed
+      vars:
+        ips: []
       set_fact:
         ips: "{{ ips }} + {{ ansible_host }}"
 
