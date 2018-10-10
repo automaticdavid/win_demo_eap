@@ -128,7 +128,7 @@
       vars:
         ip: "{{ ansible_host }}"
       set_fact:
-        ips: "{{ ips }} [ {{ ip }} ]"
+        ips: "{{ ips }} + [ {{ ip }} ]"
 
     - debug: 
         var: ips
