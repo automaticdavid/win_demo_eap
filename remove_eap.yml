@@ -42,7 +42,21 @@
       group:
         name: 'jboss_as'
         state: absent
-
+    
+- name: Remove F5 configuration
+  hosts: "{{ scope }}"
+  connection: local
+      
+  tasks:
+      
+    - name: Ensure Nodes are absent in F5 Load Balancer
+      vars:
+        bigip_node_port: "8080"
+        bigip_node_ip: "{{ ansible_host }}"
+      include_role:
+        name: nehrman.ansible-role-f5
+        tasks_from: remove_apps_to_f5.yml
+      when: jboss_eap_ha
 
     # - name: Close TCP port for EAP
     #   firewalld:
