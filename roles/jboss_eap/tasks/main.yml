@@ -96,6 +96,7 @@
   copy:
     src: "{{ jboss_eap_artifact_name }}"
     dest: "{{ jboss_eap_artifact_dl_dest }}"
+    remote_src: yes 
   when: transfer_method == 'copy-from-controller' and jboss_eap_exists.stat.exists == false
 
 - name: Extract JBoss EAP Libraries
