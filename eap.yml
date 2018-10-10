@@ -126,7 +126,7 @@
 
     - name: Get IPs for standalone-ha if needed
       set_fact:
-        ips: "{{ ips }} + {{ ansible_host }}"
+        ips: "{{ ansible_host }} [ '{{ ips }}' ]"
 
     - name: Customize the EAP standalone file 
       template:
