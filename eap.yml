@@ -18,6 +18,9 @@
     - set_fact:
       toto: hostvars
 
+    - debug:
+        var: toto
+
     - name: Get servers IPs 
       vars: 
         # ips_query: "[?`{{ scope }}`].ansible_default_ipv4.address" 
