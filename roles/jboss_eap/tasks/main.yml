@@ -1,9 +1,9 @@
 ---
 
-- debug: 
-    msg: "  {{ jboss_eap_artifacts_dl_dest_dir }} {{ jboss_eap_artifact_name }}"
+# - debug: 
+#     msg: "  {{ jboss_eap_artifacts_dl_dest_dir }} {{ jboss_eap_artifact_name }}"
 
-- fail: 
+# - fail: 
 
 - name: Fail for Missing Transfer Method
   fail:
