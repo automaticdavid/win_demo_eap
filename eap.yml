@@ -11,14 +11,14 @@
 
   pre_tasks:
 
+    - include_vars:
+      file: vars/all.yml
+
     - name: Create mount dir 
       file:
         path: /mnt/jboss
         state: directory
         mode: 0755
-
-    - include_vars:
-        file: vars/all.yml
 
     - name: RHV ops
       block:
