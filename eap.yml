@@ -16,7 +16,8 @@
     #     var: hostvars
 
     - set_fact:
-        toto: "{{ hostvars }}"
+        toto: 
+          tutu: "{{ hostvars }}"
 
     - debug:
         var: toto
@@ -24,7 +25,7 @@
     - name: Get servers IPs 
       vars: 
         # ips_query: "[?`{{ scope }}`].ansible_default_ipv4.address" 
-        ips_query: "hostvars.*.ansible_default_ipv4.address | [?@=='eap-1.openhybridcloud.io'  ]" 
+        ips_query: "tutu.*.ansible_default_ipv4.address | [?@=='eap-1.openhybridcloud.io'  ]" 
         ips: "{{ toto | json_query(ips_query) }}" 
       set_fact: 
         ips: "{{ ips }}" 
