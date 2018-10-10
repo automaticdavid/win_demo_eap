@@ -125,18 +125,22 @@
         ips: []
 
     - name: Get IPs for standalone-ha if needed
+      vars:
+        ip: "{{ ansible_host }}"
       set_fact:
-        ips: "{{ ansible_host }} [ '{{ ips }}' ]"
+        ips: "{{ ips }} [ {{ ip }} ]"
 
     - debug: 
         var: ips
 
     - set_fact:
-        toto: "{{ hostvars.values()|map(attribute='ansible_host') }}"
-
+        toto: "{{ hostvars.values()|map(attribute='ansible_host')| list }}"
 
     - debug: 
         var: toto
+
+    - fail: 
+
 
     - name: Customize the EAP standalone file 
       template:
