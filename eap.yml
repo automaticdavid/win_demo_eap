@@ -120,9 +120,11 @@
         group: jboss_as
         mode: 0664
 
-    - name: Get IPs for standalone-ha if needed
-      vars:
+
+    - set_fact:
         ips: []
+
+    - name: Get IPs for standalone-ha if needed
       set_fact:
         ips: "{{ ips }} + {{ ansible_host }}"
 
