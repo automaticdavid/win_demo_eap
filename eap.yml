@@ -188,10 +188,8 @@
         bigip_node_ip: "{{ ansible_host }}"
       include_role:
         name: nehrman.ansible-role-f5
-        tasks_from: main.yml
+        tasks_from: add_apps_to_f5.yml
       when: jboss_eap_ha
-      tags:
-        - f5
 
 
 
