@@ -18,38 +18,30 @@
       ignore_errors: yes
   when: rhsm_subscribe_host|bool
 
-# - name: Disable All RHEL Repositories
-#   command: "subscription-manager repos --disable=*"
-#   tags:
-#     - common
-#   when: rhsm_disable_existing_repositories|bool
+- name: Disable All RHEL Repositories
+  command: "subscription-manager repos --disable=*"
+  tags:
+    - common
+  when: rhsm_disable_existing_repositories|bool
 
-# - name: Enable RHEL Repositories
-#   command: "subscription-manager repos --enable {{ item }}"
-#   with_items: "{{ rhsm_repositories }}"
-#   tags:
-#     - common
-#   # when: transfer_method == 'csp-to-host' and rhsm_enable_required_repositories|bool
-#   when: rhsm_enable_required_repositories|bool
+- name: Enable RHEL Repositories
+  command: "subscription-manager repos --enable {{ item }}"
+  with_items: "{{ rhsm_repositories }}"
+  tags:
+    - common
+  when: transfer_method == 'csp-to-host' and rhsm_enable_required_repositories|bool
 
 # - name: EPEL Configuration
 #   block:
-
-#     - stat: path=/tmp/epel-release-latest-7.noarch.rpm
-#       register: epel
-
 #     - name: Download EPEL for RHEL
 #       get_url:
 #         url: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"
 #         dest: "/tmp"
 #       tags:
 #         - common
-#       when: epel.stat.exists == False
 
 #     - name: Install EPEL for RHEL
-#       yum:
-#         name: /tmp/epel-release-latest-7.noarch.rpm 
-#         state: present
+#       action: "{{ ansible_pkg_mgr }} name=/tmp/epel-release-latest-7.noarch.rpm state=present"
 #       changed_when: False
 #       tags:
 #         - common

@@ -12,8 +12,8 @@ jboss_eap_artifact_name: "{{ jboss_eap_base_directory_name }}.zip"
 jboss_eap_patch_artifact_name: jboss-eap-7.1.2-patch.zip
 jboss_eap_standalone_backup_dir_name: .standalone
 
-jboss_eap_default_logging_timezone: Europe/Paris
-jboss_eap_default_config: standalone-ha.xml
+jboss_eap_default_logging_timezone: America/New_York
+jboss_eap_default_config: standalone.xml
 jboss_eap_default_mode: standalone
 jboss_eap_bind_default_web_address: 0.0.0.0
 jboss_eap_bind_default_management_address: 0.0.0.0
