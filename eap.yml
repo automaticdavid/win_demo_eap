@@ -120,28 +120,6 @@
         group: jboss_as
         mode: 0664
 
-
-    - set_fact:
-        ips: []
-
-    - name: Get IPs for standalone-ha if needed
-      vars:
-        ip: "{{ ansible_host }}"
-      set_fact:
-        ips: "{{ ips }} + [ {{ ip }} ]"
-
-    - debug: 
-        var: ips
-
-    - set_fact:
-        toto: "{{ hostvars.values()|map(attribute='ansible_host')| list }}"
-
-    - debug: 
-        var: toto
-
-    - fail: 
-
-
     - name: Customize the EAP standalone file 
       template:
         src: "templates/{{ jboss_eap_default_config }}.j2"
