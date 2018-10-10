@@ -128,6 +128,9 @@
       set_fact:
         ips: "{{ ansible_host }} [ '{{ ips }}' ]"
 
+    - debug: 
+        vars: ips
+
     - name: Customize the EAP standalone file 
       template:
         src: "templates/{{ jboss_eap_default_config }}.j2"
