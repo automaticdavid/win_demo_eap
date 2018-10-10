@@ -1,7 +1,7 @@
 ---
 
 - debug: 
-    msg: " {{ jboss_eap_artifact_dl_dest }} : {{ jboss_eap_artifacts_dl_dest_dir }} {{ jboss_eap_artifact_name }}"
+    msg: "  {{ jboss_eap_artifacts_dl_dest_dir }} {{ jboss_eap_artifact_name }}"
 
 - fail: 
 
