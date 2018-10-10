@@ -1,5 +1,10 @@
 ---
 
+- name: Switch to HA config if enabled
+  set_fact:
+    jboss_eap_default_config: "{{ jboss_eap_default_config_ha }}" 
+  when: jboss_eap_ha
+
 - name: Set Instance facts
   set_fact:
     instance_name: "{{ instance.name }}"

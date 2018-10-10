@@ -15,11 +15,6 @@
         file: vars/all.yml
       run_once: yes
 
-    - name: Switch to HA config if enabled
-      set_fact:
-        jboss_eap_default_config: "{{ jboss_eap_default_config_ha }}" 
-      when: jboss_eap_ha
-
     - name: Create mount dir 
       file:
         path: /mnt/jboss
@@ -125,10 +120,14 @@
         group: jboss_as
         mode: 0664
 
-    - name: Customize Datasources
+    - name: Get IPs for standalone-ha if needed
+      set_fact:
+        ips: "{{ ips }} + {{ ansible_host }}"
+
+    - name: Customize the EAP standalone file 
       template:
-        src: templates/standalone-ha.xml.j2
-        dest: /opt/jboss-as/jboss-eap-7.1/standalone/configuration/standalone-ha.xml
+        src: "templates/{{ jboss_eap_default_config }}"
+        dest: "/opt/jboss-as/jboss-eap-7.1/standalone/configuration/{{ jboss_eap_default_config }}"
         owner: jboss-as
         group: jboss_as
         mode: 0664
