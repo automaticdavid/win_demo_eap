@@ -15,5 +15,4 @@ rhsm_subscribe_host: false
 sqljdbc: 'jdbc:sqlserver://{{ sqlip }}\RHFORUM:{{ sqlport }};databaseName=monolith'
 sqlport: '1433'
 transfer_method: copy-from-controller
-jboss_eap_apply_patch: false
 install_java: no
