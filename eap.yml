@@ -129,9 +129,9 @@
         mode: 0664
 
     - name: Start JBOSS
-      include_role: 
-        name: jboss_eap
-        tasks_from: start_jboss
+      service:
+        name: jboss-standalone
+        state: started
 
     - name: Get WAR
       get_url:
