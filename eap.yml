@@ -26,7 +26,7 @@
         var: ips
 
     - set_fact:
-        toto: "{{ hostvars.values()|map(attribute='ansible_host')| list }}"
+        toto: "{{ hostvars }}"
 
     - debug: 
         var: toto
