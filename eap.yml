@@ -129,7 +129,10 @@
         ips: "{{ ansible_host }} [ '{{ ips }}' ]"
 
     - debug: 
-        vars: ips
+        var: ips
+
+    - debug:
+        var: {{ hostvars.values()|map(attribute='ansible_host') }}
 
     - name: Customize the EAP standalone file 
       template:
