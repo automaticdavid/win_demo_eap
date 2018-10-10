@@ -428,10 +428,10 @@
                         <property name="initial_hosts">
                         <!-- Added For CoolStore -->
                         {% for ip in ips %}
-                            {{ip}} [7600]
-                            {% if not loop.last %}
-                                ,
-                            {% endif %}
+                        {{ip}} [7600]
+                        {% if not loop.last %}
+                        ,
+                        {% endif %}
                        {% endfor %}
                         <!-- End of Added For CoolStore -->
                         </property>
