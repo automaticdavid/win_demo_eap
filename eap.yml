@@ -13,7 +13,7 @@
 
 
     - debug: 
-        var: "{{ hostvars }}"
+        var: hostvars
 
     - fail: 
 
