@@ -73,9 +73,9 @@
     #     state: enabled 
 
     - name: Stop JBOSS
-      include_role: 
-        name: jboss_eap
-        tasks_from: stop_jboss
+      service: 
+        name: jboss-standalone
+        state: stopped
 
     - name: Create jdbc folder
       file:
