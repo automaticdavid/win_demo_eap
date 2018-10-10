@@ -31,7 +31,7 @@
     #     ips: "{{ ips }}" 
 
     - set_fact:
-        ips: {{ groups['eap']|map('extract', hostvars, 'address')|list }}
+        ips: "{{ groups['eap']|map('extract', hostvars, 'address')|list }}"
 
     - debug:
         var: ips
