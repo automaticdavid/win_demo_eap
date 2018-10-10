@@ -7,7 +7,7 @@ infra: 'rhv'
 artifact: >-
   http://gitux01.openhybridcloud.io:8081/repository/coolstore-monolith/com/redhat/coolstore/monolith/{{ version }}/monolith-{{ version }}.war
 jboss_eap_apply_patch: false
-jboss_eap_base_directory_name: /tmp/jboss-eap-7.1.0
+jboss_eap_base_directory_name: jboss-eap-7.1.0
 jboss_source_share: 'utils01.openhybridcloud.io:/exports/jboss'
 rhsm_disable_existing_repositories: false
 rhsm_enable_required_repositories: false
