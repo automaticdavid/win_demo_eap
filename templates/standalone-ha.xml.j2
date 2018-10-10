@@ -427,12 +427,12 @@
                     <protocol type="TCPPING">
                         <property name="initial_hosts">
                         <!-- Added For CoolStore -->
-                            {% for ip in ips %}
-                            {{ip}} [7600],
-                            {% if loop.last %}
+                        {% for ip in ips %}
                             {{ip}} [7600]
+                            {% if not loop.last %}
+                                ,
                             {% endif %}
-                            {% endfor %}
+                       {% endfor %}
                         <!-- End of Added For CoolStore -->
                         </property>
                         <property name="port_range">
