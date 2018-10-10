@@ -14,7 +14,7 @@ jboss_eap_standalone_backup_dir_name: .standalone
 jboss_eap_default_logging_timezone: Europe/Paris
 jboss_eap_default_config_nonha: 'standalone.xml'
 jboss_eap_default_config_ha: 'standalone-ha.xml'
-jboss_eap_default_config: "{{ jboss_eap_default_config }}"
+jboss_eap_default_config: "{{ jboss_eap_default_config_nonha }}"
 jboss_eap_default_mode: standalone
 jboss_eap_bind_default_web_address: 0.0.0.0
 jboss_eap_bind_default_management_address: 0.0.0.0
