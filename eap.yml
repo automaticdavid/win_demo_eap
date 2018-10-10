@@ -167,7 +167,7 @@
       include_role:
         name: nehrman.ansible-role-f5
         tasks_from: main.yml
-      when: eap_ha
+      when: jboss_eap_ha
       tags:
         - f5
 
