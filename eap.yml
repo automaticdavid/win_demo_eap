@@ -31,7 +31,7 @@
     #     ips: "{{ ips }}" 
 
     - set_fact:
-        ips: "{{ groups['eap']|map('extract', hostvars, 'address')|list }}"
+        ips: "{{ groups['eap']|map('extract', hostvars, 'ansible_default_ipv4')|list }}"
 
     - debug:
         var: ips
