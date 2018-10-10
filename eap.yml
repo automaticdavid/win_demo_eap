@@ -15,10 +15,14 @@
     # - debug: 
     #     var: hostvars
 
+    - set_fact:
+      toto: hostvars
+
     - name: Get servers IPs 
       vars: 
-        ips_query: "[?`{{ scope }}`].ansible_default_ipv4.address" 
-        ips: "{{ hostvars| json_query(ips_query) }}" 
+        # ips_query: "[?`{{ scope }}`].ansible_default_ipv4.address" 
+        ips_query: "hostvars.*.ansible_default_ipv4.address | [?@=='eap-1.openhybridcloud.io'  ]" 
+        ips: "{{ toto | json_query(ips_query) }}" 
       set_fact: 
         ips: "{{ ips }}" 
 
