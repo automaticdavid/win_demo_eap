@@ -27,10 +27,8 @@
         # ips_query: "[?`{{ scope }}`].ansible_default_ipv4.address" 
         ips_query: 'tutu[?name==`"{{ scope }}"`].ansible_default_ipv4.address'
         ips: "{{ toto | json_query(ips_query) }}" 
-
-
       set_fact: 
-        ips: "{{ ips }}" 
+        ips: ips 
 
 
     - debug:
