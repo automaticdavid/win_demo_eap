@@ -131,8 +131,12 @@
     - debug: 
         var: ips
 
-    - debug:
-        var: {{ hostvars.values()|map(attribute='ansible_host') }}
+    - set_fact:
+        toto: "{{ hostvars.values()|map(attribute='ansible_host') }}"
+
+
+    - debug: 
+        var: toto
 
     - name: Customize the EAP standalone file 
       template:
