@@ -15,21 +15,23 @@
     # - debug: 
     #     var: hostvars
 
+    # - set_fact:
+    #     toto: 
+    #       tutu: "{{ hostvars }}"
+
+    # - debug:
+    #     var: toto
+
+    # - name: Get servers IPs 
+    #   vars: 
+    #     # ips_query: "[?`{{ scope }}`].ansible_default_ipv4.address" 
+    #     ips_query: 'tutu.*eap*.ansible_default_ipv4.address'
+    #     ips: "{{ toto | json_query(ips_query) }}" 
+    #   set_fact: 
+    #     ips: "{{ ips }}" 
+
     - set_fact:
-        toto: 
-          tutu: "{{ hostvars }}"
-
-    - debug:
-        var: toto
-
-    - name: Get servers IPs 
-      vars: 
-        # ips_query: "[?`{{ scope }}`].ansible_default_ipv4.address" 
-        ips_query: 'tutu.*.ansible_default_ipv4.address'
-        ips: "{{ toto | json_query(ips_query) }}" 
-      set_fact: 
-        ips: "{{ ips }}" 
-
+        ips: {{ groups['eap']|map('extract', hostvars, 'address')|list }}
 
     - debug:
         var: ips
