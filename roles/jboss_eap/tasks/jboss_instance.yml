@@ -1,5 +1,10 @@
 ---
 
+- name: Switch to HA if enabled
+  set_fact:
+    jboss_eap_default_config: " {{ jboss_eap_default_config_ha }}" 
+  when: jboss_eap_ha
+
 - name: Set Instance facts
   set_fact:
     instance_name: "{{ instance.name }}"
@@ -135,18 +140,28 @@
     replace: "LAUNCH_JBOSS_IN_BACKGROUND=1 RUN_CONF=$RUN_CONF"
 
 #TODO: Node Name
-- name: Set Java Options Facts
+- name: Set Java Options Facts for standalone
   set_fact:
     instance_java_opts: "{{ (instance_java_opts + ' ' + item) | trim }}"
   with_items:
-    #- "{{ '-Djboss.bind.address='+(instance_bind_address | default('')) if (instance_bind_address is defined and instance_bind_address|trim != '') else '' }}"
-    #- "{{ '-Djboss.bind.address.management='+(instance_bind_management_address | default('')) if (instance_bind_management_address is defined and instance_bind_management_address|trim != '') else '' }}"
+    - "{{ '-Djboss.bind.address='+(instance_bind_address | default('')) if (instance_bind_address is defined and instance_bind_address|trim != '') else '' }}"
+    - "{{ '-Djboss.bind.address.management='+(instance_bind_management_address | default('')) if (instance_bind_management_address is defined and instance_bind_management_address|trim != '') else '' }}"
     - "{{ '-Duser.timezone='+(instance_logging_timezone | default('')) if (instance_logging_timezone is defined and instance_logging_timezone|trim != '') else '' }}"
-    #- "{{ '-Djboss.socket.binding.port-offset='+(instance_port_offset | default('')) if (instance_port_offset is defined and instance_port_offset|trim != '') else '' }}"
+    - "{{ '-Djboss.socket.binding.port-offset='+(instance_port_offset | default('')) if (instance_port_offset is defined and instance_port_offset|trim != '') else '' }}"
     - "{{ '-Djboss.node.name='+(instance_node_name | default('')) if (instance_node_name is defined and instance_node_name|trim != '') else '' }}"
     - "{{ '-Djboss.server.base.dir=' + instance_name }}"
+  when: not jboss_eap_ha 
 
-- name: Set Java Options
+- name: Set Java Options Facts for HA
+  set_fact:
+    instance_java_opts: "{{ (instance_java_opts + ' ' + item) | trim }}"
+  with_items:
+    - "{{ '-Duser.timezone='+(instance_logging_timezone | default('')) if (instance_logging_timezone is defined and instance_logging_timezone|trim != '') else '' }}"
+    - "{{ '-Djboss.server.base.dir=' + instance_name }}"
+    - "{{ '-Djboss.node.name=' + inventory_hostname }}"
+  when: jboss_eap_ha 
+
+- name: Set Java Options 
   lineinfile:
     dest: "{{ jboss_instance_mktemp.stdout }}/{{ jboss_eap_runtime_conf_filename }}"
     line: "JAVA_OPTS=\"$JAVA_OPTS {{ instance_java_opts }}\""
