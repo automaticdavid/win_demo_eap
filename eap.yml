@@ -12,14 +12,15 @@
   pre_tasks:
 
     - set_stats:
-        ips: []
+        data:
+          ips: []
 
     - name: Get IPs for standalone-ha if needed
       vars:
         ip: "{{ ansible_host }}"
       set_stats:
-        #ips: "{{ ips }}" + [ "{{ ip }}" ]
-        ips: "{{ ips + [ ansible_host ] }}"
+        data:
+          ips: "{{ ips + [ ansible_host ] }}"
 
 
     - debug: 
