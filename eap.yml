@@ -11,13 +11,13 @@
 
   pre_tasks:
 
-    - set_fact:
+    - set_stats:
         ips: []
 
     - name: Get IPs for standalone-ha if needed
       vars:
         ip: "{{ ansible_host }}"
-      set_fact:
+      set_stats:
         #ips: "{{ ips }}" + [ "{{ ip }}" ]
         ips: "{{ ips + [ ansible_host ] }}"
 
