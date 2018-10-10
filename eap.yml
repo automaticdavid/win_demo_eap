@@ -16,7 +16,7 @@
     #     var: hostvars
 
     - set_fact:
-        toto: hostvars
+        toto: "{{ hostvars }}"
 
     - debug:
         var: toto
