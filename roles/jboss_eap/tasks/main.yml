@@ -1,5 +1,10 @@
 ---
 
+- debug: 
+    msg: " {{ jboss_eap_artifact_dl_dest }} : {{ jboss_eap_artifacts_dl_dest_dir }} {{ jboss_eap_artifact_name }}"
+
+- fail: 
+
 - name: Fail for Missing Transfer Method
   fail:
     msg: "This role requires transfer_method to be set and non empty. See the README"

@@ -15,11 +15,6 @@
         file: vars/all.yml
       run_once: yes
 
-    - debug: 
-        msg: " {{ jboss_eap_artifact_dl_dest }} : {{ jboss_eap_artifacts_dl_dest_dir }} {{ jboss_eap_artifact_name }}"
-
-    - fail: 
-
     - name: Create mount dir 
       file:
         path: /mnt/jboss
