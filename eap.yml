@@ -138,10 +138,12 @@
         url: "{{ artifact }}"
         dest: /tmp/coolstore.war
         force: yes
+        url_password: "{{ jfrog_pass }}"
+        url_user: "{{ jfrog_user }}"
 
     - name: Install WAR
       jboss:
-        deploy_path: /opt/jboss-as/jboss-eap-7.1/standalone/deployments/
+        deploy_path: {{/opt/jboss-as/jboss-eap-7.1/standalone/deployments/}}
         src: /tmp/coolstore.war
         deployment: ROOT.war
         state: present
