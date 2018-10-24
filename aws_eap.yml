@@ -5,5 +5,5 @@
 
   tasks:
     
-    - import_playbook: ec2.yml
-    - import_playbook: eap.yml
+    - include: ec2.yml
+    - include: eap.yml
