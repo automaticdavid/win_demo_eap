@@ -4,6 +4,6 @@
   become: yes
 
   tasks:
-  
-  - include_playbook: ec2.yml
-  - include_playbook: eap.yml
+    
+    - include_playbook: ec2.yml
+    - include_playbook: eap.yml
