@@ -19,4 +19,5 @@ sqljdbc: 'jdbc:sqlserver://{{ sqlip }}\RHFORUM:{{ sqlport }};databaseName=monoli
 sqlport: '1433'
 transfer_method: copy-from-controller
 install_java: no
+deploy_path: /opt/jboss-as/jboss-eap-7.1/standalone/deployments/
 

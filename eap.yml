@@ -143,7 +143,7 @@
 
     - name: Install WAR
       jboss:
-        deploy_path: {{/opt/jboss-as/jboss-eap-7.1/standalone/deployments/}}
+        deploy_path: "{{ deploy_path }}"
         src: /tmp/coolstore.war
         deployment: ROOT.war
         state: present
