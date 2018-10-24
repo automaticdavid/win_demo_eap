@@ -139,7 +139,7 @@
         dest: /tmp/coolstore.war
         force: yes
         url_password: "{{ jfrog_pass }}"
-        url_user: "{{ jfrog_user }}"
+        url_username: "{{ jfrog_user }}"
 
     - name: Install WAR
       jboss:
