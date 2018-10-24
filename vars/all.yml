@@ -8,7 +8,7 @@ version: '1.1.0'
 jboss_eap_ha: false
 infra: 'rhv'
 artifact: >-
-  http://{{ jfrog_server }}/artifactory/monolith/monolith.war
+    {{ jfrog_server }}/artifactory/monolith/monolith.war
 jboss_eap_apply_patch: false
 jboss_eap_base_directory_name: jboss-eap-7.1.0
 jboss_source_share: 'utils01.openhybridcloud.io:/exports/jboss'
