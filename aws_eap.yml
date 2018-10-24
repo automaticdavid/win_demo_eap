@@ -1,3 +1,165 @@
----    
-- import_playbook: ec2.yml
-- import_playbook: eap.yml
+---
+- name: ec2 actions
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    rhn_username: "{{ rhsm_username }}"
+    rhn_password: "{{ rhsm_password }}"
+    rh_poolid: "{{ rhpoolid }}"
+
+
+  tasks:
+
+    - name: ec2 create
+      include_role: 
+        name: ec2
+        tasks_from: ec2_create
+
+  pre_tasks:
+
+    - include_vars:
+        file: vars/all.yml
+      run_once: yes
+
+    - name: Create mount dir 
+      file:
+        path: /mnt/jboss
+        state: directory
+        mode: 0755
+
+    - name: RHV ops
+      block:
+        - name: Install nfs client
+          yum: 
+            name: nfs-utils
+            state: present
+        - name: Mount Source folder
+          mount:
+            path: /mnt/jboss
+            src: "{{ jboss_source_share }}"
+            fstype: nfs
+            state: mounted
+      when: infra == 'rhv'
+
+    - name: AWS ops
+      block:
+        - name: Get JBOSS source
+          get_url:
+            url : "{{ s3_eap }}"
+            dest: /mnt/jboss/
+        - name: Get JDBC driver 
+          get_url:
+            url :  "{{ s3_jdbc }}"
+            dest: /mnt/jboss/          
+      when: infra == 'aws'
+
+
+  roles:
+
+    - jboss_common
+    - jboss_eap
+
+
+  tasks:
+
+    - name: Install firewalld 
+      yum:
+        name: firewalld
+        state: present
+
+    - name: Configure firewalld 
+      service:
+        name: firewalld
+        state: stopped
+        enabled: yes
+
+    # - name: Open TCP port for EAP
+    #   firewalld:
+    #     port: 8080/tcp
+    #     state: enabled 
+
+    - name: Stop JBOSS
+      service: 
+        name: jboss-standalone
+        state: stopped
+
+    - name: Create jdbc folder
+      file:
+        path: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/
+        state: directory
+        mode: 0775
+        recurse: yes
+        owner: jboss-as
+        group: jboss_as
+
+    - name: Create download temp folder
+      file:
+        path: /tmp/sqldriver
+        state: directory
+        mode: 0660
+
+    - name: Get MS SQL jdbc driver
+      unarchive:
+        src: /mnt/jboss/sqljdbc_7.0.0.0_enu.tar.gz
+        dest: /tmp/sqldriver
+        remote_src: yes
+
+    - name: Copy Driver to modules
+      copy:
+        src: /tmp/sqldriver/sqljdbc_7.0/enu/mssql-jdbc-7.0.0.jre8.jar
+        dest: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/mssql-jdbc-7.0.0.jre8.jar
+        remote_src: yes
+        owner: jboss-as
+        group: jboss_as
+        mode: 0664
+
+    - name: Clean up download
+      file: 
+        name: /tmp/sqldriver
+        state: absent 
+
+    - name: Create the module.xml file
+      copy:
+        src: files/module.xml
+        dest: /opt/jboss-as/jboss-eap-7.1/modules/com/microsoft/main/module.xml
+        owner: jboss-as
+        group: jboss_as
+        mode: 0664
+
+    - name: Customize the EAP standalone file 
+      template:
+        src: "templates/{{ jboss_eap_default_config }}.j2"
+        dest: "/opt/jboss-as/jboss-eap-7.1/standalone/configuration/{{ jboss_eap_default_config }}"
+        owner: jboss-as
+        group: jboss_as
+        mode: 0664
+
+    - name: Start JBOSS
+      service:
+        name: jboss-standalone
+        state: started
+
+    - name: Get WAR
+      get_url:
+        url: "{{ artifact }}"
+        dest: /tmp/coolstore.war
+        force: yes
+        url_password: "{{ jfrog_pass }}"
+        url_username: "{{ jfrog_user }}"
+
+    - name: Install WAR
+      jboss:
+        deploy_path: "{{ deploy_path }}"
+        src: /tmp/coolstore.war
+        deployment: ROOT.war
+        state: present
+      ignore_errors: yes
+
+    - name: Unmount Source folder
+      mount:
+        path: /mnt/jboss
+        state: absent
+      when: infra == 'rhv'
+
+
