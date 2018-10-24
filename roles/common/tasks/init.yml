@@ -1,0 +1,9 @@
+---
+
+- name:  Start Bastion
+  ec2:
+     key_name: dcl
+     state: started
+     region: eu-west-1 
+     vpc_subnet_id: "{{ ec2_subnetid }}"
+

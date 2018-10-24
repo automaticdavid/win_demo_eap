@@ -1,0 +1,12 @@
+- name: create temporary file for the gcp json 
+  tempfile:
+    state: file
+    suffix: gce
+  register: gcp_cred_file
+  delegate_to: localhost
+  run_once: yes
+  become: no
+
+- copy:
+    content: "{{ lookup('template', './files/gce.json.j2') }}" 
+    dest: "{{ gcp_cred_file.path }}"
