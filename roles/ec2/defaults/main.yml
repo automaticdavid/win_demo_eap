@@ -1,0 +1,13 @@
+---
+scope: foo
+ec2_count: 2
+ec2_scope : "{{ scope }}"
+ec2_delete: foo
+ec2_groupid : sg-0d86016242693e38f
+ec2_subnetid : subnet-0fcfce68ba2d6d393
+ec2_lb: green
+ec2_lb_target: green
+ec2_region: eu-west-1 
+ec2_vpc: vpc-714bfc17
+ec2_size: t2.micro
+ec2_ami: ami-ecc27c95

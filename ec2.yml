@@ -1,0 +1,21 @@
+---
+- name: ec2 actions
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+    - name: ec2 delete
+      include_role: 
+        name: ec2
+        tasks_from: ec2_delete
+      when: 
+        - ec2_action == "delete" or ec2_action == "destroy"
+
+
+    - name: ec2 create
+      include_role: 
+        name: ec2
+        tasks_from: ec2_create
+      when: 
+        - ec2_action == "create" or ec2_action == "deploy"
