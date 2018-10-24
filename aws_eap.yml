@@ -1,3 +1,9 @@
 ---
-include_playbook: ec2.yml
-include_playbook: eap.yml
+- name: EAP actions
+  hosts: "{{ scope }}"
+  become: yes
+
+  tasks:
+  
+  - include_playbook: ec2.yml
+  - include_playbook: eap.yml
