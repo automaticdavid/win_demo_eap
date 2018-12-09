@@ -11,6 +11,11 @@
         tasks_from: register.yml
       when: eap_register
 
+    - name: Install firewalld
+      yum:
+        name: firewalld
+        state: latest
+
     - name: Configure firewall for MS-SQL
       firewalld:
         port: "{{ item }}/tcp"
