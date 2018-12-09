@@ -64,10 +64,12 @@
         gpgkey: https://packages.microsoft.com/keys/microsoft.asc
         enabled: yes
 
-    - name: Install MS-SQL utilities {{ packages }}
+    - name: Install MS-SQL utilities 
       yum:
         name: "{{ packages }}"
       vars:
         packages:
         - mssql-tools 
         - unixODBC-devel
+      environment:
+        ACCEPT_EULA: 'y'
