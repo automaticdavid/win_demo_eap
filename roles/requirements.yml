@@ -12,3 +12,7 @@
   scm: git
   name: nehrman.ansible-role-f5
   version: master
+
+- src: https://github.com/automaticdavid/ec2
+  version: master
+  name: ec2

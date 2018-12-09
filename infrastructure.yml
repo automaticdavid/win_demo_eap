@@ -1,0 +1,21 @@
+---
+- name: Create AWS Infrastructure
+  hosts: localhost
+  connection: local
+
+  tasks:
+
+    - name: Create Database
+      include_role:
+        name: ec2
+      vars:
+        instance_tags: '{"role":"database"}'
+        ec2_count: 1
+        ec2_size: t2_small
+  
+    - name: Create Database
+      include_role:
+        name: ec2
+      vars:
+        instance_tags: '{"role":"eap"}'
+        ec2_count: 2

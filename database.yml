@@ -1,5 +1,5 @@
 ---
-- name: Install & Configure MS-SQL Express
+- name: Install & Configure MS-SQL
   hosts: "{{ scope }}"
   become: True
 
