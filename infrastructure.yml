@@ -24,3 +24,7 @@
           Role: jboss_eap
         ec2_size: t2.medium
         ec2_count: "{{ eap_ec2_count }}"
+
+    - name: Display Groups
+      debug:
+        var: groups.key
