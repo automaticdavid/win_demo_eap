@@ -25,3 +25,6 @@
         ec2_size: t2.medium
         ec2_count: "{{ eap_ec2_count }}"
 
+    - name: Refresh inventory to ensure new instaces exist in inventory
+      meta: refresh_inventory
+
