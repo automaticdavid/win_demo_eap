@@ -63,3 +63,11 @@
         gpgcheck: yes
         gpgkey: https://packages.microsoft.com/keys/microsoft.asc
         enabled: yes
+
+    - name: Install MS-SQL Tools
+      yum:
+        name: "{{ packages }}"
+      vars:
+        packages:
+        - mssql-tools 
+        - unixODBC-devel
