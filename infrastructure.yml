@@ -9,7 +9,9 @@
       include_role:
         name: ec2
       vars:
-        instance_tags: '{"role":"database"}'
+        instance_tags: 
+          - Name: "{{ scope }}"
+          - Role: "database"
         ec2_count: 1
         ec2_size: t2_small
   
@@ -17,5 +19,7 @@
       include_role:
         name: ec2
       vars:
-        instance_tags: '{"role":"eap"}'
+        instance_tags: 
+          - Name: "{{ scope }}"
+          - Role: "eap"
         ec2_count: 2
