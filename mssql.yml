@@ -2,7 +2,56 @@
 - name: Install & Configure MS-SQL Express
   hosts: "{{ scope }}"
 
-  roles:
-    - { role: bahaula.win_sqlexpress2014 }
+tasks: 
+
+- name: Register system to RHSM
+  include_role:
+    name: azure
+    tasks_grom: register.yml
+
+- name: Configure firewall for MS-SQL
+  firewalld:
+    port: "{{ item }}/tcp"
+    permanent: true
+    state: enabled
+    immediate: true
+  with_items: 
+    - 1433
+
+- name: Restart firewall service
+  systemd: 
+    name: firewalld 
+    masked: no  
+    enabled: yes
+    state: restarted
+
+- name: Setup the MS-SQL Repository
+  yum_repository:
+    name: packages-microsoft-com-mssql-server-2017
+    description: microsoft.com mssql-server-2017
+    file: external_repos
+    baseurl: https://packages.microsoft.com/rhel/7/mssql-server-2017/
+    gpgcheck: yes
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+    enabled: yes
+
+- name: Install MS-SQL
+  yum:
+    name: mssql-server
+    state: latest
+
+# - name: Configure MS-SQL
+# /opt/mssql/bin/mssql-conf setup
+
+# - name: Ensure Service is running
+# # Verify that sqlserver is running
+# systemctl status mssql-server
+
+# - name: Install MS-SQL tools
+# curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/7/prod.repo
+# yum install -y mssql-tools unixODBC-devel
 
 
+# echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
+# echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+# source ~/.bashrc
