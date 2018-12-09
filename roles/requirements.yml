@@ -14,5 +14,5 @@
   version: master
 
 - src: https://github.com/automaticdavid/ec2
-  version: master
+  version: devel
   name: ec2
