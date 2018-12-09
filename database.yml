@@ -1,6 +1,6 @@
 ---
 - name: Install & Configure MS-SQL
-  hosts: tag_Role_database
+  hosts: tag_Role_database:&tag_Name_{{scope}}
   become: True
 
   tasks: 
