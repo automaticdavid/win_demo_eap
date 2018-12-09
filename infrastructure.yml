@@ -13,7 +13,7 @@
           Name: "{{ scope }}-mssql"
           Role: "database"
         ec2_count: 1
-        ec2_size: t2_small
+        ec2_size: t2.small
   
     - name: Create EAP VMs
       include_role:
@@ -23,3 +23,4 @@
           Name: "{{ scope }}"
           Role: "jboss_eap"
         ec2_count: 2
+        ec2_size: t2.medium
