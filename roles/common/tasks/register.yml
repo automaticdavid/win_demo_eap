@@ -2,7 +2,6 @@
   yum:
     name: subscription-manager
     state: present
-  when: eap_register
 
 - name: Register system into RHSM
   redhat_subscription:
