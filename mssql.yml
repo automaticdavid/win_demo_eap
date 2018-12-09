@@ -6,7 +6,7 @@
 
     - name: Register system to RHSM
       include_role:
-        name: azure
+        name: common
         tasks_from: register.yml
 
     - name: Configure firewall for MS-SQL
