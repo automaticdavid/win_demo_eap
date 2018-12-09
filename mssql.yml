@@ -54,18 +54,12 @@
         name: mssql-server
         state: latest
 
-# - name: Configure MS-SQL
-# /opt/mssql/bin/mssql-conf setup
-
-# - name: Ensure Service is running
-# # Verify that sqlserver is running
-# systemctl status mssql-server
-
-# - name: Install MS-SQL tools
-# curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/7/prod.repo
-# yum install -y mssql-tools unixODBC-devel
-
-
-# echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
-# echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
-# source ~/.bashrc
+    - name: Setup the MS-SQL Tools Repository
+      yum_repository:
+        name: packages-microsoft-com-prod
+        description: microsoft.com packages prod
+        file: external_repos
+        baseurl: https://packages.microsoft.com/rhel/7/prod/
+        gpgcheck: yes
+        gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+        enabled: yes
