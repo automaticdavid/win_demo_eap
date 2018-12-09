@@ -16,6 +16,13 @@
         name: firewalld
         state: latest
 
+    - name: Start firewall service
+      systemd: 
+        name: firewalld 
+        masked: no  
+        enabled: yes
+        state: started
+
     - name: Configure firewall for MS-SQL
       firewalld:
         port: "{{ item }}/tcp"
