@@ -9,4 +9,3 @@
     state: present
     username: "{{ rhsm_username }}"
     password: "{{ rhsm_password }}"
-  when: eap_register

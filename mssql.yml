@@ -8,6 +8,7 @@
       include_role:
         name: common
         tasks_from: register.yml
+      when: eap_register
 
     - name: Configure firewall for MS-SQL
       firewalld:
