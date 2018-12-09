@@ -1,0 +1,8 @@
+---
+- name: Install & Configure MS-SQL Express
+  hosts: "{{ scope }}"
+
+  roles:
+    - { role: bahaula.win_sqlexpress2014 }
+
+

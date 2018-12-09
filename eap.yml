@@ -1,5 +1,5 @@
 ---
-- name: EAP actions
+- name: Install & Configure JBoss EAP
   hosts: "{{ scope }}"
   become: yes
 
@@ -15,7 +15,7 @@
         file: vars/all.yml
       run_once: yes
 
-    - name: Create mount dir 
+    - name: Create the mount directory for NFS copy of EAP sources
       file:
         path: /mnt/jboss
         state: directory
