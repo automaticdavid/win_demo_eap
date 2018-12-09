@@ -10,7 +10,7 @@
         name: ec2
       vars:
         instance_tags: 
-          - Name: "{{ scope }}"
+          - Name: "{{ scope }}-mssql"
           - Role: "database"
         ec2_count: 1
         ec2_size: t2_small
@@ -22,3 +22,4 @@
         instance_tags: 
           Name: "{{ scope }}"
           Role: "jboss_eap"
+        ec2_count: 2
