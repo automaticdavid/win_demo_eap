@@ -64,7 +64,7 @@
         gpgkey: https://packages.microsoft.com/keys/microsoft.asc
         enabled: yes
 
-    - name: Install MS-SQL Tools
+    - name: Install MS-SQL utilities {{ packages }}
       yum:
         name: "{{ packages }}"
       vars:
