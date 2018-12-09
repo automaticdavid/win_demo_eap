@@ -20,5 +20,5 @@
         name: ec2
       vars:
         instance_tags: 
-          - Name: "{{ scope }}"
-          - Role: "eap"
+          Name: "{{ scope }}"
+          Role: "jboss_eap"
