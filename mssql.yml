@@ -2,43 +2,43 @@
 - name: Install & Configure MS-SQL Express
   hosts: "{{ scope }}"
 
-tasks: 
+  tasks: 
 
-- name: Register system to RHSM
-  include_role:
-    name: azure
-    tasks_grom: register.yml
+    - name: Register system to RHSM
+      include_role:
+        name: azure
+        tasks_grom: register.yml
 
-- name: Configure firewall for MS-SQL
-  firewalld:
-    port: "{{ item }}/tcp"
-    permanent: true
-    state: enabled
-    immediate: true
-  with_items: 
-    - 1433
+    - name: Configure firewall for MS-SQL
+      firewalld:
+        port: "{{ item }}/tcp"
+        permanent: true
+        state: enabled
+        immediate: true
+      with_items: 
+        - 1433
 
-- name: Restart firewall service
-  systemd: 
-    name: firewalld 
-    masked: no  
-    enabled: yes
-    state: restarted
+    - name: Restart firewall service
+      systemd: 
+        name: firewalld 
+        masked: no  
+        enabled: yes
+        state: restarted
 
-- name: Setup the MS-SQL Repository
-  yum_repository:
-    name: packages-microsoft-com-mssql-server-2017
-    description: microsoft.com mssql-server-2017
-    file: external_repos
-    baseurl: https://packages.microsoft.com/rhel/7/mssql-server-2017/
-    gpgcheck: yes
-    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
-    enabled: yes
+    - name: Setup the MS-SQL Repository
+      yum_repository:
+        name: packages-microsoft-com-mssql-server-2017
+        description: microsoft.com mssql-server-2017
+        file: external_repos
+        baseurl: https://packages.microsoft.com/rhel/7/mssql-server-2017/
+        gpgcheck: yes
+        gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+        enabled: yes
 
-- name: Install MS-SQL
-  yum:
-    name: mssql-server
-    state: latest
+    - name: Install MS-SQL
+      yum:
+        name: mssql-server
+        state: latest
 
 # - name: Configure MS-SQL
 # /opt/mssql/bin/mssql-conf setup
