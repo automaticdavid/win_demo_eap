@@ -25,6 +25,7 @@
           Role: eap
         ec2_size: t2.medium
         ec2_count: "{{ eap_ec2_count }}"
+        ec2_ami: ami-0e12cbde3e77cbb98
 
 #    - name: Refresh inventory 
 #      meta: refresh_inventory
