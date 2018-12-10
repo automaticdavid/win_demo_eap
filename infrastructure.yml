@@ -21,7 +21,7 @@
       vars:
         ec2_instance_tags: 
           Name: "{{ scope }}"
-          Role: jboss-eap
+          Role: eap
         ec2_size: t2.medium
         ec2_count: "{{ eap_ec2_count }}"
 

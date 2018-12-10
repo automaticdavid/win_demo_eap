@@ -1,16 +1,13 @@
 ---
 - name: Install & Configure JBoss EAP
-  hosts: tag_Role_jboss_eap:&tag_Name_{{scope}}
+  hosts: tag_Role_eap:&tag_Name_{{scope}}
   become: yes
 
   vars:
     rhn_username: "{{ rhsm_username }}"
     rhn_password: "{{ rhsm_password }}"
     rh_poolid: "{{ rhpoolid }}"
-    sqlip: '147.135.178.125' 
-
   
-
   pre_tasks:
 
     - debug: 
@@ -19,6 +16,17 @@
     - include_vars:
         file: vars/all.yml
       run_once: yes
+
+    - name: Find MS-SQL IP Address 
+      set_fact:
+        sqlip: "{{ item }}"
+      with_inventory_hostnames:
+        - tag_Role_database:&tag_Name_{{scope}}
+
+    - name: Display MS-SQL IP Address
+      debug:
+        var: sqlip
+        verbosity: 2
 
     # - name: RHV ops
     #   block:
@@ -55,16 +63,7 @@
             dest: /tmp/jboss/          
       when: infra == 'aws'
 
-    - name: Find MS-SQL IP Address 
-      set_fact:
-        sqlip: "{{ item }}"
-      with_inventory_hostnames:
-        - tag_Role_database:&tag_Name_{{scope}}
 
-    - name: Display MS-SQL IP Address
-      debug:
-        var: sqlip
-        verbosity: 2
 
   roles:
 
