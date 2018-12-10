@@ -73,3 +73,25 @@
         - unixODBC-devel
       environment:
         ACCEPT_EULA: 'y'
+      
+    - name: Generate SA password
+      set_fact:
+        sql_sa_password: "{{ lookup('password', '/dev/null') }}"
+      no_log: True
+
+    - name: Check MS-SQL Configuration
+      command: /opt/mssql/bin/mssql-conf validate
+      register: sql_configured
+      changed_when: False 
+      environment:
+         MSSQL_SA_PASSWORD: "{{ sql_sa_password }}"
+         MSSQL_PID: express 
+      no_log: True
+
+    - name: Run MS-SQL Configuration
+      command:  /opt/mssql/bin/mssql-conf -n setup accept-eula
+      when: sql_configured != 0
+      environment:
+         MSSQL_SA_PASSWORD: "{{ sql_sa_password }}"
+         MSSQL_PID: express
+      no_log: True 
