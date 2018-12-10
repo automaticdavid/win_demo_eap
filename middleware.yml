@@ -1,6 +1,6 @@
 ---
 - name: Install & Configure JBoss EAP
-  hosts: tag_Role_jboss_eap:&tag_Name_{{scope}}
+  hosts: tag_Role_jboss-eap:&tag_Name_{{scope}}
   become: yes
 
   vars:
