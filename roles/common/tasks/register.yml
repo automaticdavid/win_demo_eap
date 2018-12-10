@@ -8,3 +8,4 @@
     state: present
     username: "{{ rhsm_username }}"
     password: "{{ rhsm_password }}"
+    force_register: True
