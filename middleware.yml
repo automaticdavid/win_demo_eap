@@ -31,10 +31,11 @@
       with_inventory_hostnames:
         - tag_Role_eap:&tag_Name_{{scope}}
 
-    - name: Display MS-SQL IP Address
+    - name: Display EAP IP Address
       debug:
-        var: sqlip
+        var: ips
         verbosity: 2
+        
     - name: Install needed utilities packages
       yum:
         name: "{{ item }}"
