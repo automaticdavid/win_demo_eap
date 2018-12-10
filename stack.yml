@@ -1,4 +1,4 @@
 ---
 - import_playbook: infrastructure.yml
 - import_playbook: database.yml
-# - import_playbook: eap.yml
+- import_playbook: eap.yml
