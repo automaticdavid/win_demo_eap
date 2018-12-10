@@ -111,7 +111,7 @@
 
     - name: Get MS SQL jdbc driver
       unarchive:
-        src: /mnt/jboss/sqljdbc_7.0.0.0_enu.tar.gz
+        src: /tmp/sqljdbc_7.0.0.0_enu.tar.gz
         dest: /tmp/sqldriver
         remote_src: yes
 
@@ -166,11 +166,11 @@
         state: present
       ignore_errors: yes
 
-    - name: Unmount Source folder
-      mount:
-        path: /mnt/jboss
-        state: absent
-      when: infra == 'rhv'
+    # - name: Unmount Source folder
+    #   mount:
+    #     path: /mnt/jboss
+    #     state: absent
+    #   when: infra == 'rhv'
 
 
 - name: LB actions
