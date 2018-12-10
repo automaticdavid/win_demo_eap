@@ -10,9 +10,6 @@
   
   pre_tasks:
 
-    - debug: 
-        var: groups
-
     - include_vars:
         file: vars/all.yml
       run_once: yes
@@ -27,6 +24,14 @@
       debug:
         var: sqlip
         verbosity: 2
+    
+    - name: Install needed utilities packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - firewalld
+        - unzip
 
     # - name: RHV ops
     #   block:
@@ -72,14 +77,6 @@
 
 
   tasks:
-
-    - name: Install needed utilities packages
-      yum:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - firewalld
-        - unzip
 
     - name: Configure firewalld 
       service:
