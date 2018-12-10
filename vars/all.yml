@@ -7,8 +7,10 @@ jfrog_pass: "{{ jfrog_pass }}"
 version: '1.1.0'
 jboss_eap_ha: false
 infra: 'aws'
+# artifact: >-
+#     {{ jfrog_server }}/artifactory/monolith/monolith.war
 artifact: >-
-    {{ jfrog_server }}/artifactory/monolith/monolith.war
+    http://gitux01.openhybridcloud.io:8081/repository/coolstore-monolith/com/redhat/coolstore/monolith/1.1.0/monolith-1.1.0.war
 jboss_eap_apply_patch: false
 jboss_eap_base_directory_name: jboss-eap-7.1.0
 jboss_source_share: 'utils01.openhybridcloud.io:/exports/jboss'

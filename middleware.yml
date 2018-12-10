@@ -184,20 +184,20 @@
     #   when: infra == 'rhv'
 
 
-- name: LB actions
-  hosts: "{{ scope }}"
-  connection: local
+# - name: LB actions
+#   hosts: "{{ scope }}"
+#   connection: local
 
-  tasks:
+#   tasks:
 
-    - name: Ensure Nodes are present in F5 Load Balancer
-      vars:
-        bigip_node_port: "8080"
-        bigip_node_ip: "{{ ansible_host }}"
-      include_role:
-        name: nehrman.ansible-role-f5
-        tasks_from: add_apps_to_f5.yml
-      when: jboss_eap_ha
+#     - name: Ensure Nodes are present in F5 Load Balancer
+#       vars:
+#         bigip_node_port: "8080"
+#         bigip_node_ip: "{{ ansible_host }}"
+#       include_role:
+#         name: nehrman.ansible-role-f5
+#         tasks_from: add_apps_to_f5.yml
+#       when: jboss_eap_ha
 
 
 
