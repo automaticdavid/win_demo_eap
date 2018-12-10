@@ -95,3 +95,8 @@
          MSSQL_SA_PASSWORD: "{{ sql_sa_password }}"
          MSSQL_PID: express
       no_log: True 
+
+    - name: Display SA Password
+      debug:
+        var: sql_sa_password
+        verbosity: 2
