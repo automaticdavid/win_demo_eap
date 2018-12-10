@@ -42,11 +42,11 @@
         - name: Get JBOSS source
           get_url:
             url : "{{ s3_eap }}"
-            dest: /mnt/jboss/
+            dest: /tmp/jboss/
         - name: Get JDBC driver 
           get_url:
             url :  "{{ s3_jdbc }}"
-            dest: /mnt/jboss/          
+            dest: /tmp/jboss/          
       when: infra == 'aws'
 
     - name: Find MS-SQL IP Address 
