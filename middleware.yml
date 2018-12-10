@@ -24,7 +24,17 @@
       debug:
         var: sqlip
         verbosity: 2
-    
+
+    - name: Find EAP VMs IP addresses
+      set_fact:
+        ips: "{{ item }}"
+      with_inventory_hostnames:
+        - tag_Role_eap:&tag_Name_{{scope}}
+
+    - name: Display MS-SQL IP Address
+      debug:
+        var: sqlip
+        verbosity: 2
     - name: Install needed utilities packages
       yum:
         name: "{{ item }}"
