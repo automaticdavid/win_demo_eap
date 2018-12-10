@@ -73,10 +73,13 @@
 
   tasks:
 
-    - name: Install firewalld 
+    - name: Install needed utilities packages
       yum:
-        name: firewalld
+        name: "{{ item }}"
         state: present
+      loop:
+        - firewalld
+        - unzip
 
     - name: Configure firewalld 
       service:
