@@ -20,18 +20,17 @@
         file: vars/all.yml
       run_once: yes
 
-    - name: Create the mount directory for NFS copy of EAP sources
-      file:
-        path: /mnt/jboss
-        state: directory
-        mode: 0755
-
     # - name: RHV ops
     #   block:
     #     - name: Install nfs client
     #       yum: 
     #         name: nfs-utils
     #         state: present
+    #     - name: Create the mount directory for NFS copy of EAP sources
+    #       file:
+    #         path: /mnt/jboss
+    #         state: directory
+    #         mode: 0755
     #     - name: Mount Source folder
     #       mount:
     #         path: /mnt/jboss
@@ -43,8 +42,9 @@
     - name: AWS ops
       block:
         - file:
-            src: /tmp/jboss
+            path: /tmp/jboss
             state: directory
+            mode: 0755
         - name: Get JBOSS source
           get_url:
             url : "{{ s3_eap }}"
