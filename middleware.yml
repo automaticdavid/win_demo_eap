@@ -49,18 +49,18 @@
 
     - name: AWS ops
       block:
-        - file:
-            path: /tmp/jboss
-            state: directory
-            mode: 0755
+        # - file:
+        #     path: /tmp/jboss
+        #     state: directory
+        #     mode: 0755
         - name: Get JBOSS source
           get_url:
             url : "{{ s3_eap }}"
-            dest: /tmp/jboss/
+            dest: /tmp/
         - name: Get JDBC driver 
           get_url:
             url :  "{{ s3_jdbc }}"
-            dest: /tmp/jboss/          
+            dest: /tmp/         
       when: infra == 'aws'
 
 
