@@ -13,6 +13,9 @@
 
   pre_tasks:
 
+    - debug: 
+        var: groups
+
     - include_vars:
         file: vars/all.yml
       run_once: yes
@@ -39,6 +42,9 @@
 
     - name: AWS ops
       block:
+        - file:
+            src: /tmp/jboss
+            state: directory
         - name: Get JBOSS source
           get_url:
             url : "{{ s3_eap }}"
