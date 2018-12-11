@@ -109,9 +109,11 @@
       changed_when: False 
       no_log: True
 
-    - name: Checked if monolith DB is present
+    - name: Check if monolith DB is present
+      var: 
+        matcher: 
       set_fact: 
-        monolith_defined: "{{ sql_db_list.stdout_lines | select('match',`{{ db_name }}*`) | list }}"
+        monolith_defined: "{{ sql_db_list.stdout_lines | select('match', db_name) | list }}"
       no_log: True
 
     - name: Create the monolith DB if needed
