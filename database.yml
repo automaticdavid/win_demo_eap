@@ -103,14 +103,13 @@
       no_log: true
 
     - name: Checked if monolith DB is present
-      var: 
+      set_fact: 
         monolith_defined: "{{ sql_db_list.stdout_lines | select('match','monolith*') | list | first }}"
-      debug:
+
+    - debug:
         var: monolith_defined
 
     - name: Create the monolith DB if needed
-      var: 
-        monolith_defined:  "{{ sql_db_list.stdout_lines | select('match','monolith*') | list | first }}"
       command: /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'CREATE DATABASE monolith;' 
       when: not monolith_defined
 
