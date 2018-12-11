@@ -102,8 +102,9 @@
       no_log: true
 
     - debug: 
-      var: sql_db_list
-
+        var: sql_db_list
+        verbosity: 2
+        
     - name: Create the monolith DB if needed
       command:   /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'CREATE DATABASE monolith;' 
       no_log: true
