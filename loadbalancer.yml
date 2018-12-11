@@ -10,5 +10,5 @@
       vars:
         ec2_lb_filters:
           "tag:Name": "{{ ec2_scope }}"
-          "tag:Role":  "{{ ec2_instance_tags.Role }}"
+          "tag:Role":  eap
           "instance-state-name": running
