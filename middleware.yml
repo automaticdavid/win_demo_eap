@@ -53,6 +53,11 @@
       debug:
         var: ips
         verbosity: 2
+
+    - name: Display MS-SQL facts
+      debug:
+        var: ansible_local[sqlip]['msql']
+        verbosity: 2
         
     - name: Install needed utilities packages
       yum:

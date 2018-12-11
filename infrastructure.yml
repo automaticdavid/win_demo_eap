@@ -15,7 +15,7 @@
         ec2_count: 1
         ec2_size: t2.medium
         ec2_ami: ami-02ace471
-        # add correct sg
+        ec2_groupid: sg-03580ee6c98db6051
   
     - name: Create EAP VMs
       include_role:
@@ -27,6 +27,8 @@
         ec2_size: t2.medium
         ec2_count: "{{ eap_ec2_count }}"
         ec2_ami: ami-0e12cbde3e77cbb98
+        ec2_groupid: sg-06bf8abd04830d9ff
+
 
 #    - name: Refresh inventory 
 #      meta: refresh_inventory
