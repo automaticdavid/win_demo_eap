@@ -16,6 +16,10 @@
         ec2_size: t2.medium
         ec2_ami: ami-02ace471
         ec2_groupid: sg-03580ee6c98db6051
+        ec2_lb_filters: 
+          'tag:Name': "{{ ec2_scope }}"
+          'tag:Role': database
+          'instance-state-name': running
   
     - name: Create EAP VMs
       include_role:
@@ -28,6 +32,10 @@
         ec2_count: "{{ eap_ec2_count }}"
         ec2_ami: ami-0e12cbde3e77cbb98
         ec2_groupid: sg-06bf8abd04830d9ff
+        ec2_lb_filters: 
+          'tag:Name': "{{ ec2_scope }}"
+          'tag:Role': eap
+          'instance-state-name': running
 
 
 #    - name: Refresh inventory 
