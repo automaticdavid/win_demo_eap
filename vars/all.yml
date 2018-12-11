@@ -17,7 +17,7 @@ jboss_source_share: 'utils01.openhybridcloud.io:/exports/jboss'
 rhsm_disable_existing_repositories: false
 rhsm_enable_required_repositories: false
 rhsm_subscribe_host: false
-sqljdbc: 'jdbc:sqlserver://{{ sqlip }}\RHFORUM:{{ sqlport }};databaseName=monolith'
+sqljdbc: 'jdbc:sqlserver://{{ sqlip }}:{{ sqlport }};databaseName=monolith'
 sqlport: '1433'
 transfer_method: copy-from-controller
 install_java: yes
