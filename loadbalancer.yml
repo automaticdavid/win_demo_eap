@@ -12,3 +12,5 @@
           "tag:Name": "{{ ec2_scope }}"
           "tag:Role":  eap
           "instance-state-name": running
+        ec2_lb_target_port: 8080
+      

@@ -1,6 +1,7 @@
 ---
 - name: Install & Configure JBoss EAP
   hosts: tag_Role_eap:&tag_Name_{{scope}}
+  gather_facts: yes
   become: yes
 
   vars:
@@ -57,6 +58,11 @@
     - name: Display MS-SQL facts
       debug:
         var: ansible_local[sqlip]['mssql']
+        verbosity: 2
+
+    - name: Debug local facts
+      debug: 
+        var: ansible_local
         verbosity: 2
         
     - name: Install needed utilities packages

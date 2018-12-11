@@ -2,6 +2,7 @@
 - name: Install & Configure MS-SQL
   hosts: tag_Role_database:&tag_Name_{{scope}}
   become: True
+  gather_facts: yes
 
   vars:
     db_name: monolith
