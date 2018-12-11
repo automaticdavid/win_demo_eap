@@ -131,6 +131,10 @@
       set_fact:
         db_name: "{{ db_name }}"
 
+    - name: Set memory fact for DB user 
+      set_fact:
+        db_name: "{{ db_user }}"
+
     - name: Create custom fact directory
       file:
         path: "/etc/ansible/facts.d"
