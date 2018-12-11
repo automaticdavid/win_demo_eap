@@ -96,7 +96,23 @@
          MSSQL_PID: express
       no_log: True 
 
+    - name: Check if the monolith DB is defined
+      command:   /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'SELECT Name from sys.Databases;' 
+      register: sql_db_list
+      no_log: true
+
+    - debug: 
+      var: sql_db_list
+
+    - name: Create the monolith DB if needed
+      command:   /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'CREATE DATABASE monolith;' 
+      no_log: true
+
+# update login and password for db in jboss 
+
+
     - name: Display SA Password
       debug:
         var: sql_sa_password
         verbosity: 2
+
