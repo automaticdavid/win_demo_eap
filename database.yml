@@ -3,6 +3,13 @@
   hosts: tag_Role_database:&tag_Name_{{scope}}
   become: True
 
+  vars:
+    db_name: monolith
+    db_creation_date: "{{ ansible_date_time.date }}"
+    db_project: "project_{{scope}}"
+    db_user: sa
+
+
   tasks: 
 
     - name: Register system to RHSM
@@ -100,23 +107,37 @@
       command:  /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'SELECT Name from sys.Databases;' 
       register: sql_db_list
       changed_when: False 
-      no_log: true
+      no_log: True
 
     - name: Checked if monolith DB is present
       set_fact: 
-        monolith_defined: "{{ sql_db_list.stdout_lines | select('match','monolith*') | list }}"
-
-    - debug:
-        var: monolith_defined
+        monolith_defined: "{{ sql_db_list.stdout_lines | select('match',`{{ db_name }}*`) | list }}"
+      no_log: True
 
     - name: Create the monolith DB if needed
-      command: /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'CREATE DATABASE monolith;' 
+      command: /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'CREATE DATABASE {{ db_name | quote }};' 
       when: monolith_defined.0 is not defined
-
-# update login and password for db in jboss 
 
     - name: Display SA Password
       debug:
         var: sql_sa_password
         verbosity: 2
+
+    - name: Set memory fact for SA Password
+      set_fact:
+        db_password: "{{ sql_sa_password }}"
+
+    - name: Set memory fact for DB name 
+      set_fact:
+        db_name: "{{ db_name }}"
+
+    - name: Create custom fact directory
+      file:
+        path: "/etc/ansible/facts.d"
+        state: "directory"
+
+    - name: Create the mssql local fact 
+      template:
+        src: templates/mssql.fact.j2
+        dest: /etc/ansible/facts.d/mssql.fact
 
