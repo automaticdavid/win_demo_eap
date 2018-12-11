@@ -104,17 +104,16 @@
 
     - name: Checked if monolith DB is present
       set_fact: 
-        monolith_defined: "{{ sql_db_list.stdout_lines | select('match','monolith*') | list | first }}"
+        monolith_defined: "{{ sql_db_list.stdout_lines | select('match','monolith*') | list }}"
 
     - debug:
         var: monolith_defined
 
     - name: Create the monolith DB if needed
       command: /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'CREATE DATABASE monolith;' 
-      when: not monolith_defined
+      when: monolith_defined.0 is not defined
 
 # update login and password for db in jboss 
-
 
     - name: Display SA Password
       debug:
