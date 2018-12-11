@@ -133,7 +133,7 @@
 
     - name: Set memory fact for DB user 
       set_fact:
-        db_name: "{{ db_user }}"
+        db_user: "{{ db_user }}"
 
     - name: Create custom fact directory
       file:
