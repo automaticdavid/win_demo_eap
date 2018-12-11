@@ -96,18 +96,23 @@
          MSSQL_PID: express
       no_log: True 
 
-    - name: Check if the monolith DB is defined
-      command:   /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'SELECT Name from sys.Databases;' 
+    - name: List DBs
+      command:  /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'SELECT Name from sys.Databases;' 
       register: sql_db_list
+      changed_when: False 
       no_log: true
 
-    - debug: 
-        var: sql_db_list
-        verbosity: 2
-        
+    - name: Checked if monolith DB is present
+      var: 
+        monolith_defined: "{{ sql_db_list.stdout_lines | select('match','monolith*') | list | first }}"
+      debug:
+        var: monolith_defined
+
     - name: Create the monolith DB if needed
-      command:   /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'CREATE DATABASE monolith;' 
-      no_log: true
+      var: 
+        monolith_defined:  "{{ sql_db_list.stdout_lines | select('match','monolith*') | list | first }}"
+      command: /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'CREATE DATABASE monolith;' 
+      when: not monolith_defined
 
 # update login and password for db in jboss 
 
