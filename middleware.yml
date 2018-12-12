@@ -28,20 +28,20 @@
 
     - name: Find MS-SQL password
       set_fact:
-        sqlpass: "{{ hostvars[sqlip].db_password }}"
+        sqlpass: "{{ hostvars[sqlip][db_password] }}"
 
     - name: Find MS-SQL user
       set_fact:
-        sqluser: "{{ hostvars[sqlip].db_user }}"
+        sqluser: "{{ hostvars[sqlip][db_user] }}"
 
     - name: Display MS-SQL password
       debug:
-        var: hostvars[sqlip].db_password
+        var: sqlpass
         verbosity: 2
 
     - name: Display MS-SQL user
       debug:
-        var: hostvars[sqlip].db_user
+        var: sqluser
         verbosity: 2
 
     - name: Find EAP VMs IP addresses
@@ -53,16 +53,6 @@
     - name: Display EAP IP Address
       debug:
         var: ips
-        verbosity: 2
-
-    - name: Display MS-SQL facts
-      debug:
-        var: ansible_local[sqlip]['mssql']
-        verbosity: 2
-
-    - name: Debug local facts
-      debug: 
-        var: ansible_local
         verbosity: 2
         
     - name: Install needed utilities packages

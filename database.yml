@@ -8,7 +8,6 @@
     db_name: monolith
     db_creation_date: "{{ ansible_date_time.date }}"
     db_project: "project_{{scope}}"
-    db_user: sa
 
 
   tasks: 
