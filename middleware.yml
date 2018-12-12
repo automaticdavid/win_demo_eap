@@ -28,11 +28,11 @@
 
     - name: Find MS-SQL password
       set_fact:
-        sqlpass: "{{ hostvars[sqlip][db_password] }}"
+        sqlpass: hostvars[sqlip]['db_password']
 
     - name: Find MS-SQL user
       set_fact:
-        sqluser: "{{ hostvars[sqlip][db_user] }}"
+        sqluser: hostvars[sqlip]['db_user']
 
     - name: Display MS-SQL password
       debug:
