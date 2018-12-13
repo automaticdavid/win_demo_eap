@@ -1,5 +1,5 @@
 - name: LB actions
-  hosts: "{{ scope }}"
+  hosts: "*{{ scope }}"
   connection: local
 
   tasks:
