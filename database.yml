@@ -102,13 +102,13 @@
       environment:
          MSSQL_SA_PASSWORD: "{{ sql_sa_password }}"
          MSSQL_PID: express
-      no_log: True 
+      no_log: False 
 
     - name: List DBs
       command:  /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'SELECT Name from sys.Databases;' 
       register: sql_db_list
       changed_when: False 
-      no_log: True
+      no_log: False
 
     - name: Check if monolith DB is present
       set_fact: 
