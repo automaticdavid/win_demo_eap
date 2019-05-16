@@ -2,3 +2,4 @@
 - import_playbook: infrastructure.yml
 - import_playbook: database.yml
 - import_playbook: middleware.yml
+- import_playbook: loadbalancer.yml
