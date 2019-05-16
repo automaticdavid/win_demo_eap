@@ -1,5 +1,5 @@
 ---
-- name: Create AWS Infrastructure
+- name: Create Azure Infrastructure
   hosts: localhost
   connection: local
 
