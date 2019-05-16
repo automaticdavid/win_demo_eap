@@ -13,6 +13,6 @@
   name: nehrman.ansible-role-f5
   version: master
 
-- src: https://github.com/automaticdavid/ec2
+- src: https://github.com/automaticdavid/azure
   version: devel
-  name: ec2
+  name: azure
